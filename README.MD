@@ -107,21 +107,15 @@ It's the main application folder. Here you will write all your amazing component
 <br />
 
 <!-- USAGE EXAMPLES -->
-<!-- ## Usage
+## Usage
 
-In your main.js
+After installing run the following scripts
 
-    // Require the library
-    const lbtc = require('unizend-localbtc')
+    // Run server
+    npm run dev
 
-    // Initialize the app using your HMAC Auth key and secret
-    lbtc.init(YOUR_HMAC_AUTH_KEY, YOUR_HMAC_AUTH_SECRET)
-
-    // Get an specific currency average data
-    lbtc.publicMarketData.bitcoinAverage('VES')
-      .then(response => {
-          console.log(response)
-      }) -->
+    // Create bundle and keep track of changes in your code
+    npm run webpack
 
 <!-- ROADMAP -->
 <!-- ## Roadmap
