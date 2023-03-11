@@ -105,6 +105,8 @@ It's the main application folder. Here you will write all your amazing component
 3. main.js This file will import your app and tell paradox to render your vanilla javascript
 
 <br />
+<hr />
+<br />
 
 <!-- USAGE EXAMPLES -->
 ## Usage
