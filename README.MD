@@ -29,7 +29,7 @@
   <!-- * [Built With](#built-with) -->
 * [Getting Started](#getting-started)
   <!-- * [Installation](#installation) -->
-<!-- * [Usage](#usage) -->
+* [Usage](#usage)
 <!-- * [Roadmap](#roadmap) -->
 <!-- * [Contributing](#contributing) -->
 <!-- * [License](#license) -->
