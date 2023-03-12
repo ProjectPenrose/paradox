@@ -111,13 +111,12 @@ It's the main application folder. Here you will write all your amazing component
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-After installing run the following scripts
+After installing run the following script
 
     // Run server
     npm run dev
 
-    // Create bundle and keep track of changes in your code
-    npm run webpack
+It will generate a new directory `dist` with an index.html and a bundle.js file
 
 <!-- ROADMAP -->
 <!-- ## Roadmap
