@@ -1,36 +1,73 @@
-// Routes cache
-const routes = {}
+export default class Router {
+  constructor(options = { routes: [], baseUrl: "" }) {
+    const { routes = [], baseUrl = "" } = options;
 
-/**
- * Create a route
- * 
- * @since 0.0.1
- * 
- * @param {String} href current url
- * @returns {Funtion} route handler
- */
-export default function Router(href) {
-  // declare defaultCallback in case the route has no callback
-  const defaultCallback = () => null
+    this.routes = routes.map(route => ({
+      ...route,
+      pathSegments: route.path.split("/")
+    }));
+    this.baseUrl = baseUrl;
 
-  // Cache routes
-  Object.keys(this).forEach(route => {
-    routes[route] = this[route] || defaultCallback
-  })
+    const url = new URL(window.location.href);
+    this.queryString = url.search;
+    this.path = url.href.replace(this.baseUrl, "").replace(this.queryString, "") || "/";
+    this.params = new URLSearchParams(url.search);
 
-  // Get potential matches from the path name
-  const potentialMatches = Object.keys(routes).map((path) => {
-    return {
-      handler: routes[path],
-      result: location.pathname.match(new RegExp(`^${path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)")}$`)),
-    };
-  })
+    this.memo = {};
+  }
 
-  // Get current route from potential matches
-  let currentRoute = potentialMatches.find(
-    (potentialMatch) => potentialMatch.result !== null
-  );
+  async init() {
+    let { path } = this;
+    const { routes, queryString } = this;
 
-  // Return current router handler
-  return currentRoute.handler
+    if (path.includes("#")) path = path.split("#")[0];
+
+    if (this.memo[path]) return this.memo[path];
+
+    const pathSegments = path.split("/");
+
+    const matchedRoute = routes.find(({ pathSegments: routePathSegments }) => {
+      if (routePathSegments.length !== pathSegments.length) {
+        return false;
+      }
+
+      for (let i = 0; i < routePathSegments.length; i++) {
+        const routeSegment = routePathSegments[i];
+        const pathSegment = pathSegments[i];
+
+        if (!routeSegment.startsWith(":") && routeSegment !== pathSegment) {
+          return false;
+        } else if (routeSegment.startsWith(":")) {
+          this.params.set(routeSegment.slice(1), pathSegment);
+        }
+      }
+
+      return true;
+    });
+
+    if (matchedRoute) {
+      try {
+        matchedRoute.props = {
+          ...matchedRoute.props,
+          queryString,
+          params: this.params,
+          baseUrl: this.baseUrl,
+        };
+  
+        if (matchedRoute.layout) {
+          // Pass the component and its props to the layout
+          await matchedRoute.layout(matchedRoute.component, matchedRoute.props);
+        } else {
+          await matchedRoute.component(matchedRoute.props || {});
+        }
+  
+        this.memo[path] = path;
+        return path;
+      } catch (error) {
+        throw new Error(error);
+      }
+    } else {
+      throw new Error(`Route ${path} not found`);
+    }
+  }
 }
