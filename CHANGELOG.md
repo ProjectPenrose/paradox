@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2023-12-14
+### Change
+* Delete unnecessary files and update dependencies
+* Ready to turn into a npm package
+
 ## [0.0.2] - 2023-03-11
 ### Added
 * `concurrently` package to allow run the app just with `npm run dev` By [@alexsc6955](https://github.com/alexsc6955)
