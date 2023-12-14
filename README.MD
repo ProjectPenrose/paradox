@@ -35,7 +35,7 @@
 
 Working on cool stuff to say here. stay tuned and please be patient, this is a work in progress.
 
-Contributions are welcome thogh xd, please [open an issue](https://github.com/ProjectPenrose/paradox/issues) to discuss what you would like to change, add or remove and we can figure it out together.
+Contributions are welcome thogh xd, please [start a discussion](https://github.com/ProjectPenrose/paradox/discussions/categories/ideas) to discuss what you would like to change, add or remove and we can figure it out together.
 
 <br />
 <hr />
