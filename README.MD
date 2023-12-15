@@ -106,31 +106,38 @@ Paradox provides a simple router to handle the navigation between pages.
 ```javascript
 import Paradox from "paradox";
 
-function Home() {
-  return Paradox.buildElement("div", {
+function Home(props) {
+  const { root } = props;
+  root.append(Paradox.buildElement("div", {
     id: "home",
     text: "Welcome to Paradox!",
-  });
+  }));
 }
 
 function About(props) {
-  const { name } = props;
-  return Paradox.buildElement("div", {
+  const { name, root } = props;
+  root.append(Paradox.buildElement("div", {
     id: "about",
     text: `Paraodx is a simple vanilla javascript library for DOM manipulation. This is the ${name} page.`,
-  });
+  }));
 }
+
+const root = document.getElementById("root");
 
 const routes = [
   {
     path: "/",
     component: Home,
+    props: {
+      root,
+    },
   },
   {
     path: "/about",
     component: About,
     props: {
       name: "About",
+      root,
     },
   },
 ];
