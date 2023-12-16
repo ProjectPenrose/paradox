@@ -41,19 +41,11 @@
 * [Roadmap](#roadmap)
 * [Acknowledgements](#acknowledgements)
 
-<br />
-<hr />
-<br />
-
 ## About The Project
 
 Working on cool stuff to say here. stay tuned and please be patient, this is a work in progress.
 
 Contributions are welcome thogh xd, please [start a discussion](https://github.com/ProjectPenrose/paradox/discussions/categories/ideas) to discuss what you would like to change, add or remove and we can figure it out together.
-
-<br />
-<hr />
-<br />
 
 ## Getting Started
 
@@ -74,9 +66,7 @@ Paradox is a simple vanilla javascript library for DOM manipulation that also pr
     npm install
     ```
 
-<br />
-<hr />
-<br />
+
 
 ## Usage
 
@@ -121,10 +111,6 @@ Then, the script will run the dev script, so you can start developing your proje
 - The `app` folder is just a simple example, you can delete it and create your own project.
 - The `webpack.config.js` file is just a simple example, you can delete it and create your own webpack config file.
 - The `dist` folder will contain the javascript bundle and a css file with the styles. (The css file is generated from the `scss/main.scss` file)
-
-<br />
-<hr />
-<br />
 
 ## Documentation
 
@@ -272,25 +258,13 @@ Paradox.pubsub.publish("myEvent", "Hello World!");
 - You can use the `Paradox.pubsub.unsubscribe` method to unsubscribe from an event.
 - You can not publish an event before subscribing to it xd.
 
-<br />
-<hr />
-<br />
-
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-<br />
-<hr />
-<br />
-
 ## License
 
 Distributed under the MIT License. See [`LICENSE`](https://github.com/ProjectPenrose/paradox?tab=MIT-1-ov-file) for more information.
-
-<br />
-<hr />
-<br />
 
 ## Contact
 
@@ -299,10 +273,6 @@ Santiago Rincon - [@alexsc6955](https://linkedin.com/in/alexsc6955)
 ## Roadmap
 
 See the [open issues](https://github.com/ProjectPenrose/paradox/issues) for a list of proposed features (and known issues).
-
-<br />
-<hr />
-<br />
 
 ## Acknowledgements
 
