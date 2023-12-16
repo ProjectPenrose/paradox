@@ -33,7 +33,7 @@
   * [Paraodx on development mode](#paraodx-on-development-mode)
 * [Documentation](#documentation)
   * [Build an element with `Paradox.buildElement`](#build-an-element-with-paradoxbuildelement)
-  * [Router with `Paradox.Router`](#router-with-paradoxrouter)
+  * [Routes with `Paradox.Router`](#routes-with-paradoxrouter)
   * [PubSub with `Paradox.pubsub`](#pubsub-with-paradoxpubsub)
 * [Contributing](#contributing)
 * [License](#license)
@@ -171,7 +171,7 @@ document.body.appendChild(Paradox.buildElement("button", myButton));
 - The `children` property is an array of objects with the `tag` and `options` properties. The `tag` property is the element name and the `options` property is the object with the element properties.
 - The `options` property is optional, so you can pass just the `tag` property and it will return an element with no properties.
 
-### Route with `Paradox.Router`
+### Routes with `Paradox.Router`
 
 Paradox provides a simple router to handle the navigation between pages.
 
