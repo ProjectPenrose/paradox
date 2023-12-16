@@ -53,7 +53,7 @@ Paradox is a simple vanilla javascript library for DOM manipulation that also pr
 
 ### Requirements
 
-- [Node.js](https://nodejs.org/en/) >= v18.17.1
+- [Node.js](https://nodejs.org/en/) >= v18.17.1 (For development mode)
 
 ### Installation
 
