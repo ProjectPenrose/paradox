@@ -20,7 +20,8 @@ export default class Router {
     const url = new URL(window.location.href);
     this.queryString = url.search;
     this.path = url.href.replace(this.baseUrl, "").replace(this.queryString, "") || "/";
-    this.params = new URLSearchParams(url.search);
+    this.query = new URLSearchParams(url.search);
+    this.params = new Map();
 
     this.memo = {};
   }

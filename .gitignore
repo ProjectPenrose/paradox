@@ -8,3 +8,5 @@ browserslist
 webpack.config.js
 .env-example
 scss/
+server/
+app/

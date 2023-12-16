@@ -4,8 +4,9 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
+    "paradox-app": "node paradoxApp.js && npm run dev",
     "dev": "concurrently \"npm run webpack\" \"npm run sass\" \"npm run server\"",
-    "server": "nodemon tests/server.js",
+    "server": "nodemon server/index.js",
     "webpack": "webpack-cli -w --config ./webpack.config.js --mode development --env=development",
     "sass": "sass -w scss/main.scss dist/css/style.css"
   },
