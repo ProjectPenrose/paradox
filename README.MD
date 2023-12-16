@@ -185,7 +185,7 @@ document.body.appendChild(Paradox.buildElement("button", myButton));
 - The `children` property is an array of objects with the `tag` and `options` properties. The `tag` property is the element name and the `options` property is the object with the element properties.
 - The `options` property is optional, so you can pass just the `tag` property and it will return an element with no properties.
 
-### Router with `Paradox.Router`
+### Route with `Paradox.Router`
 
 Paradox provides a simple router to handle the navigation between pages.
 
@@ -231,7 +231,7 @@ const routes = [
 const router = new Paradox.Router(routes);
 router.init()
   .then((path) => {
-    console.log(`The current path is: ${path}`);
+    console.info(`The current path is: ${path}`);
   })
   .catch((error) => {
     console.error(error);
@@ -240,7 +240,11 @@ router.init()
 
 **NOTES:**
 - The router will look for the `#` in the url to handle the navigation. For example, if the url is `http://localhost:8080/#/about`, the router will navigate to the `/about` path.
-- The router will inject the `props` object into the component function as an argument and it will contain the `params` and `query` objects.
+- The router will inject the `props` object into the component function as an argument and it will contain, besides the properties that you pass, the following properties:
+  - `queryString`: A string with the query parameters. For example, if the url is `http://localhost:8080/about?name=Paradox`, the `queryString` will be `?name=Paradox`.
+  - `params`: An object with the path parameters. For example, if the url is `http://localhost:8080/about/Paradox`, and the path is `/about/:name`, the `params` object will be `{ name: "Paradox" }`.
+  - `query`: An object with the query parameters. For example, if the url is `http://localhost:8080/about?name=Paradox`, the `query` object will be `{ name: "Paradox" }`.
+  - `baseUrl`: A string with the base url. For example, if the url is `http://localhost:8080/about?name=Paradox`, the `baseUrl` will be `http://localhost:8080`.
 
 ### PubSub with `Paradox.pubsub`
 
@@ -282,7 +286,7 @@ Contributions are what make the open source community such an amazing place to b
 
 ## License
 
-Distributed under the MIT License.
+Distributed under the MIT License. See [`LICENSE`](https://github.com/ProjectPenrose/paradox?tab=MIT-1-ov-file) for more information.
 
 <br />
 <hr />
@@ -291,3 +295,15 @@ Distributed under the MIT License.
 ## Contact
 
 Santiago Rincon - [@alexsc6955](https://linkedin.com/in/alexsc6955)
+
+## Roadmap
+
+See the [open issues](https://github.com/ProjectPenrose/paradox/issues) for a list of proposed features (and known issues).
+
+<br />
+<hr />
+<br />
+
+## Acknowledgements
+
+* [K2](https://github.com/k2con) - For not letting me use React in their projects xd.
