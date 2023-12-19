@@ -1,9 +1,5 @@
 
-<!-- PROJECT LOGO -->
 <p align="center">
-  <!-- <a href="#">
-    <img src="http://unizend.com/images/unizend-logo.svg" alt="<Paradox/>" width="200" height="80">
-  </a> -->
 
   <h1 align="center">&lt;Paradox/&gt; Not another javascript framework!</h1>
 
@@ -23,29 +19,30 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
-* [About the Project](#about-the-project)
-* [Getting Started](#getting-started)
-  * [Requirements](#requirements)
-  * [Installation](#installation)
-* [Usage](#usage)
-  * [Paraodx as a module](#paraodx-as-a-module)
-  * [Paraodx as a module in a simple html project](#paraodx-as-a-module-in-a-simple-html-project)
-  * [Paraodx on development mode](#paraodx-on-development-mode)
-* [Documentation](#documentation)
-  * [Build an element with `Paradox.buildElement`](#build-an-element-with-paradoxbuildelement)
-  * [Routes with `Paradox.Router`](#routes-with-paradoxrouter)
-  * [PubSub with `Paradox.pubsub`](#pubsub-with-paradoxpubsub)
-* [Contributing](#contributing)
-* [License](#license)
-* [Contact](#contact)
-* [Roadmap](#roadmap)
-* [Acknowledgements](#acknowledgements)
+- [Table of Contents](#table-of-contents)
+- [About The Project](#about-the-project)
+- [Getting Started](#getting-started)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Paradox as a module in a simple html project](#paradox-as-a-module-in-a-simple-html-project)
+  - [Paradox on development mode](#paradox-on-development-mode)
+- [Documentation](#documentation)
+  - [Build an element with `Paradox.buildElement`](#build-an-element-with-paradoxbuildelement)
+  - [Routes with `Paradox.Router`](#routes-with-paradoxrouter)
+  - [PubSub with `Paradox.pubsub`](#pubsub-with-paradoxpubsub)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Roadmap](#roadmap)
+- [Acknowledgements](#acknowledgements)
 
 ## About The Project
 
 Working on cool stuff to say here. stay tuned and please be patient, this is a work in progress.
 
 Contributions are welcome thogh xd, please [start a discussion](https://github.com/ProjectPenrose/paradox/discussions/categories/ideas) to discuss what you would like to change, add or remove and we can figure it out together.
+
+**Link to the** <a href="https://www.npmjs.com/package/penrose-paradox">npm package</a>
 
 ## Getting Started
 
@@ -72,7 +69,7 @@ Paradox is a simple vanilla javascript library for DOM manipulation that also pr
 
 Now things can change depending on what you want to do, so here are some options:
 
-### Paraodx as a module
+### Paradox as a module
 
 If you want to use it as a module in a project that uses webpack or something similar, you can just import it like this:
 ```javascript
@@ -80,7 +77,7 @@ import Paradox from "path/to/paradox/src";
 ```
 **Note: It'll be soon available as a package in npm so this will change.**
 
-### Paraodx as a module in a simple html project
+### Paradox as a module in a simple html project
 
 If you want to use it as a module in a simple html project, you should import it in your script like this:
 
@@ -90,7 +87,7 @@ If you want to use it as a module in a simple html project, you should import it
 </script>
 ```
 
-### Paraodx on development mode
+### Paradox on development mode
 
 If you want to build a project that uses paradox, you can run the build script:
 ```sh
@@ -190,7 +187,7 @@ function About(props) {
   const { name, root } = props;
   root.append(Paradox.buildElement("div", {
     id: "about",
-    text: `Paraodx is a simple vanilla javascript library for DOM manipulation. This is the ${name} page.`,
+    text: `Paradox is a simple vanilla javascript library for DOM manipulation. This is the ${name} page.`,
   }));
 }
 
