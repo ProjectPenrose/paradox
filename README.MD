@@ -8,8 +8,6 @@
     <br>
     Hopefully it will ease your development while learning
     <br />
-    .
-    <a href="https://www.npmjs.com/package/penrose-paradox">npm package</a>
     ·
     <a href="https://github.com/ProjectPenrose/paradox/labels/bug">Report Bugs</a>
     ·
@@ -43,6 +41,8 @@
 Working on cool stuff to say here. stay tuned and please be patient, this is a work in progress.
 
 Contributions are welcome thogh xd, please [start a discussion](https://github.com/ProjectPenrose/paradox/discussions/categories/ideas) to discuss what you would like to change, add or remove and we can figure it out together.
+
+**Link to the** <a href="https://www.npmjs.com/package/penrose-paradox">npm package</a>
 
 ## Getting Started
 
