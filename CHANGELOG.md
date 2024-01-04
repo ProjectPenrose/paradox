@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2024-01-04
+### Added
+- Declaration file for TypeScript
+
 ## [0.2.0] - 2023-12-16
 ### Added
 - `paradoxApp.js` file to create a sample app
