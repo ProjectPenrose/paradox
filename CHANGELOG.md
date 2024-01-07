@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.2] - 2024-01-06
+### Added
+- `Paradox.pubsub.unsubscribe` method to unsubscribe a function from a topic
+
 ## [0.2.1] - 2024-01-04
 ### Added
 - Declaration file for TypeScript
