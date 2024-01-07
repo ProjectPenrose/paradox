@@ -22,6 +22,21 @@ class PubSub {
   }
 
   /**
+   * Unsubscribe from an event.
+   * @param {string} event - The event name to unsubscribe from.
+   * @param {function} callback - The callback function to be removed from the subscribers.
+   * @returns {array} - An array of callbacks that remain subscribed to the event.
+   */
+  unsubscribe(event, callback) {
+    let self = this;
+    if (!self.events.hasOwnProperty(event)) {
+      return 0;
+    }
+
+    return self.events[event].filter((cb) => cb !== callback);
+  }
+
+  /**
    * Publish an event.
    * @param {string} event - The event name to publish.
    * @param {object} [data={}] - The data to be passed to the event subscribers.
