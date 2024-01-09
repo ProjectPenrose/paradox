@@ -20,7 +20,7 @@ class Router {
      * @param {Array} options.routes - An array of route objects.
      * @param {string} options.baseUrl - The base URL of the application.
      */
-    constructor(options = { routes: [], baseUrl: "" }) {
+    constructor(options = {}) {
         const { routes = [], baseUrl = "" } = options;
         this.routes = routes.map(route => (Object.assign(Object.assign({}, route), { pathSegments: route.path.split("/") })));
         this.baseUrl = baseUrl;
@@ -64,18 +64,21 @@ class Router {
             if (matchedRoute) {
                 try {
                     matchedRoute.props = Object.assign(Object.assign({}, matchedRoute.props), { queryString, params: this.params, baseUrl: this.baseUrl });
-                    if (matchedRoute.layout) {
+                    if (matchedRoute.layout && typeof matchedRoute.layout === "function") {
                         // Pass the component and its props to the layout
                         yield matchedRoute.layout(matchedRoute.component, matchedRoute.props);
                     }
-                    else {
+                    else if (matchedRoute.component && typeof matchedRoute.component === "function") {
                         yield matchedRoute.component(matchedRoute.props || {});
+                    }
+                    else {
+                        throw new Error("Route component or layout not found");
                     }
                     this.memo[path] = path;
                     return path;
                 }
                 catch (error) {
-                    throw new Error(error);
+                    throw new Error(String(error));
                 }
             }
             else {

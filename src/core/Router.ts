@@ -3,13 +3,20 @@
  * Represents a router that handles routing and navigation in a web application.
  */
 export default class Router {
+  routes: Array<any>;
+  baseUrl: string;
+  queryString: string;
+  path: string;
+  query: URLSearchParams;
+  params: Map<string, string>;
+  memo: { [key: string]: string };
   /**
    * Creates a new instance of the Router class.
    * @param {Object} options - The options for configuring the router.
    * @param {Array} options.routes - An array of route objects.
    * @param {string} options.baseUrl - The base URL of the application.
    */
-  constructor(options = { routes: [], baseUrl: "" }) {
+  constructor(options: { routes?: any[], baseUrl?: string } = {}) {
     const { routes = [], baseUrl = "" } = options;
 
     this.routes = routes.map(route => ({
@@ -70,17 +77,19 @@ export default class Router {
           baseUrl: this.baseUrl,
         };
   
-        if (matchedRoute.layout) {
+        if (matchedRoute.layout && typeof matchedRoute.layout === "function") {
           // Pass the component and its props to the layout
           await matchedRoute.layout(matchedRoute.component, matchedRoute.props);
-        } else {
+        } else if (matchedRoute.component && typeof matchedRoute.component === "function") {
           await matchedRoute.component(matchedRoute.props || {});
+        } else {
+          throw new Error("Route component or layout not found");
         }
   
         this.memo[path] = path;
         return path;
       } catch (error) {
-        throw new Error(error);
+        throw new Error(String(error));
       }
     } else {
       throw new Error(`Route ${path} not found`);
