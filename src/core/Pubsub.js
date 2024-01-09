@@ -1,3 +1,4 @@
+//@ts-check
 /**
  * PubSub class for implementing publish-subscribe pattern.
  */
@@ -30,7 +31,7 @@ class PubSub {
   unsubscribe(event, callback) {
     let self = this;
     if (!self.events.hasOwnProperty(event)) {
-      return 0;
+      self.events[event] = [];
     }
 
     return self.events[event].filter((cb) => cb !== callback);
