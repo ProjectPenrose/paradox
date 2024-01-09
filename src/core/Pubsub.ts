@@ -1,8 +1,9 @@
-//@ts-check
 /**
  * PubSub class for implementing publish-subscribe pattern.
  */
 class PubSub {
+  events: { [key: string]: Function[] };
+
   constructor() {
     this.events = {};
   }
@@ -13,7 +14,7 @@ class PubSub {
    * @param {function} callback - The callback function to be executed when the event is published.
    * @returns {number} - The number of callbacks subscribed to the event.
    */
-  subscribe(event, callback) {
+  subscribe(event: string, callback: Function): number {
     let self = this;
     if (!self.events.hasOwnProperty(event)) {
       self.events[event] = [];
@@ -28,7 +29,7 @@ class PubSub {
    * @param {function} callback - The callback function to be removed from the subscribers.
    * @returns {array} - An array of callbacks that remain subscribed to the event.
    */
-  unsubscribe(event, callback) {
+  unsubscribe(event: string, callback: Function): Array<any> {
     let self = this;
     if (!self.events.hasOwnProperty(event)) {
       self.events[event] = [];
@@ -43,7 +44,7 @@ class PubSub {
    * @param {object} [data={}] - The data to be passed to the event subscribers.
    * @returns {array} - An array of return values from the event subscribers.
    */
-  publish(event, data = {}) {
+  publish(event: string, data: object = {}): Array<any> {
     let self = this;
     if (!self.events.hasOwnProperty(event)) {
       return [];

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-//@ts-check
 /**
  * PubSub class for implementing publish-subscribe pattern.
  */
