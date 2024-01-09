@@ -1,7 +1,8 @@
+//@ts-check
 // Object for caching processed text values
 const memoizedText = {};
 // Function to retrieve or compute a formatted text value
-function getText(text) {
+function getText(text = "") {
   // Check if the text has been processed and cached; return it if so
   if (memoizedText[text] !== undefined) {
     return memoizedText[text];
@@ -23,7 +24,7 @@ function getText(text) {
 const memoizedStyleKeys = {};
 
 // Function to convert camelCase into kebab-case for CSS properties
-function getStyleKey(key) {
+function getStyleKey(key = "") {
   // Check if the key is already processed and return the cached value if so
   if (memoizedStyleKeys[key] !== undefined) {
     return memoizedStyleKeys[key];
@@ -57,7 +58,7 @@ const eventListeners = new WeakMap();
  */
 export default function buildElement(tag, options = { id: "", classList: "", children: [], attributes: {}, events: {}, text: "", style: {} }) {
   // Return empty string if tag is not provided
-  if (!tag) return "";
+  if (!tag) throw new Error("Tag is required");
   // Destructure and provide default values for the options parameter
   const { id = "", classList = "", children = [], attributes = {}, events = {}, text = "", style = {} } = options;
 
