@@ -7,6 +7,17 @@ const getText_1 = __importDefault(require("./helpers/getText"));
 const getStyleKey_1 = __importDefault(require("./helpers/getStyleKey"));
 // WeakMap to store event listeners for each element
 const eventListeners = new WeakMap();
+const booleanAttributes = [
+    "disabled",
+    "checked",
+    "selected",
+    "readonly",
+    "required",
+    "multiple",
+    "autofocus",
+    "formnovalidate",
+    "autocompleted",
+];
 /**
  * Builds and returns an HTML element based on the provided tag and options.
  *
@@ -42,7 +53,7 @@ function buildElement(tag, options = { id: "", classList: "", children: [], attr
     // Set the attributes for the element
     for (const [key, value] of Object.entries(attributes)) {
         // Attributes like disabled, checked, selected need special handling
-        if (key === "disabled" || key === "checked" || key === "selected") {
+        if (booleanAttributes.includes(key)) {
             if (value)
                 element.setAttribute(key, String(value));
         }
