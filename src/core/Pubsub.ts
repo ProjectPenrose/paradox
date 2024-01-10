@@ -34,7 +34,7 @@ class PubSub {
   unsubscribe(event: string, callback: EventCallback): Array<any> {
     let self = this;
     if (!self.events.hasOwnProperty(event)) {
-      self.events[event] = [];
+      self.events[event] = self.events[event].filter((cb) => cb !== callback);
     }
 
     return self.events[event].filter((cb) => cb !== callback);
