@@ -7,6 +7,7 @@ const getText_1 = __importDefault(require("./helpers/getText"));
 const getStyleKey_1 = __importDefault(require("./helpers/getStyleKey"));
 // WeakMap to store event listeners for each element
 const eventListeners = new WeakMap();
+// List of boolean attributes that need special handling
 const booleanAttributes = [
     "disabled",
     "checked",
