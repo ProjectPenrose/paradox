@@ -1,4 +1,3 @@
-//@ts-check
 /**
  * Represents a router that handles routing and navigation in a web application.
  */
