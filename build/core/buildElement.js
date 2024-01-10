@@ -72,10 +72,10 @@ function buildElement(tag, options = { id: "", classList: "", children: [], attr
         // Attributes like disabled, checked, selected need special handling
         if (key === "disabled" || key === "checked" || key === "selected") {
             if (value)
-                element.setAttribute(key, value);
+                element.setAttribute(key, String(value));
         }
         else
-            element.setAttribute(key, value);
+            element.setAttribute(key, String(value));
     }
     // Retrieve or create the event listeners Map for this particular element
     let elementEvents = eventListeners.get(element);
@@ -93,10 +93,11 @@ function buildElement(tag, options = { id: "", classList: "", children: [], attr
         element.addEventListener(key, value);
         elementEvents.set(key, value);
     }
+    const styleDeclaration = element.style;
     // Apply inline style to the element by converting keys from camelCase
     for (const [key, value] of Object.entries(style)) {
         const styleKey = getStyleKey(key);
-        element.style[styleKey] = value;
+        styleDeclaration.setProperty(styleKey, value);
     }
     // Set the text content of the element after processing
     if (text)

@@ -1,6 +1,6 @@
 //@ts-check
 // Object for caching processed text values
-const memoizedText = {};
+const memoizedText:{ [key: string]: string } = {};
 // Function to retrieve or compute a formatted text value
 function getText(text = "") {
   // Check if the text has been processed and cached; return it if so
@@ -21,10 +21,10 @@ function getText(text = "") {
 }
 
 // Object for caching converted style keys
-const memoizedStyleKeys = {};
+const memoizedStyleKeys: { [key: string]: string } = {};
 
 // Function to convert camelCase into kebab-case for CSS properties
-function getStyleKey(key = "") {
+function getStyleKey(key: string = "") {
   // Check if the key is already processed and return the cached value if so
   if (memoizedStyleKeys[key] !== undefined) {
     return memoizedStyleKeys[key];
@@ -56,7 +56,7 @@ const eventListeners = new WeakMap();
  * @param {Object} [options.style={}] - The key-value pairs of inline styles for the element.
  * @returns {HTMLElement} - The constructed HTML element.
  */
-export default function buildElement(tag, options = { id: "", classList: "", children: [], attributes: {}, events: {}, text: "", style: {} }) {
+export default function buildElement(tag: string, options = { id: "", classList: "", children: [], attributes: {}, events: {}, text: "", style: {} }) {
   // Return empty string if tag is not provided
   if (!tag) throw new Error("Tag is required");
   // Destructure and provide default values for the options parameter
@@ -79,9 +79,9 @@ export default function buildElement(tag, options = { id: "", classList: "", chi
   for (const [key, value] of Object.entries(attributes)) {
     // Attributes like disabled, checked, selected need special handling
     if (key === "disabled" || key === "checked" || key === "selected") {
-      if (value) element.setAttribute(key, value);
+      if (value) element.setAttribute(key, String(value));
     }
-    else element.setAttribute(key, value);
+    else element.setAttribute(key, String(value));
   }
 
   // Retrieve or create the event listeners Map for this particular element
@@ -99,14 +99,15 @@ export default function buildElement(tag, options = { id: "", classList: "", chi
     }
 
     // Add new event listener and update the storage Map
-    element.addEventListener(key, value);
+    element.addEventListener(key as string, value as EventListener);
     elementEvents.set(key, value);
   }
 
+  const styleDeclaration: CSSStyleDeclaration = element.style;
   // Apply inline style to the element by converting keys from camelCase
   for (const [key, value] of Object.entries(style)) {
-    const styleKey = getStyleKey(key);
-    element.style[styleKey] = value;
+    const styleKey = getStyleKey(key) as string;
+    styleDeclaration.setProperty(styleKey, value as string);
   }
 
   // Set the text content of the element after processing
