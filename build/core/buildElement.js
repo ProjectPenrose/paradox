@@ -1,23 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-//@ts-check
-// Object for caching processed text values
-const memoizedText = {};
-// Function to retrieve or compute a formatted text value
-function getText(text = "") {
-    // Check if the text has been processed and cached; return it if so
-    if (memoizedText[text] !== undefined) {
-        return memoizedText[text];
-    }
-    // If it's the first time, compute the formatted text
-    const result = typeof text === "string"
-        ? text.replace(/\\x([0-9A-Fa-f]{2})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
-        : String(text);
-    // Cache the result for future use
-    memoizedText[text] = result;
-    // Return the processed text
-    return result;
-}
+const getText_1 = __importDefault(require("./helpers/getText"));
 // Object for caching converted style keys
 const memoizedStyleKeys = {};
 // Function to convert camelCase into kebab-case for CSS properties
@@ -101,7 +87,7 @@ function buildElement(tag, options = { id: "", classList: "", children: [], attr
     }
     // Set the text content of the element after processing
     if (text)
-        element.textContent = getText(text);
+        element.textContent = (0, getText_1.default)(text);
     // Create a Document Fragment to efficiently append children
     const fragment = document.createDocumentFragment();
     // Append each child to the fragment
