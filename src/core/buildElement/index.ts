@@ -1,8 +1,14 @@
 import getText from "./helpers/getText";
 import getStyleKey from "./helpers/getStyleKey";
 
-// WeakMap to store event listeners for each element
-const eventListeners = new WeakMap();
+const elementsCache: { [key: string]: HTMLElement } = {};
+
+function createElement(elementName: string) : HTMLElement {
+  if (elementsCache[elementName]) return elementsCache[elementName].cloneNode() as HTMLElement;
+  const element = document.createElement(elementName);
+  elementsCache[elementName] = element;
+  return element;
+}
 
 // List of boolean attributes that need special handling
 const booleanAttributes = [
@@ -16,14 +22,37 @@ const booleanAttributes = [
   "formnovalidate",
   "autocompleted",
 ];
+function setAttributes(element: HTMLElement, attributes: { [key: string]: string }) {
+  for (const [key, value] of Object.entries(attributes)) {
+    // Attributes like disabled, checked, selected need special handling
+    if (booleanAttributes.includes(key)) {
+      if (value) element.setAttribute(key, String(value));
+    }
+    else element.setAttribute(key, String(value));
+  }
+}
 
-const elementsCache: { [key: string]: HTMLElement } = {};
+// WeakMap to store event listeners for each element
+const eventListeners = new WeakMap();
+function handleEvents(element: HTMLElement, events: { [key: string]: EventListener }) {
+  // Retrieve or create the event listeners Map for this particular element
+  let elementEvents = eventListeners.get(element);
+  if (!elementEvents) {
+    elementEvents = new Map();
+    eventListeners.set(element, elementEvents);
+  }
 
-function createElement(elementName: string) : HTMLElement {
-  if (elementsCache[elementName]) return elementsCache[elementName].cloneNode() as HTMLElement;
-  const element = document.createElement(elementName);
-  elementsCache[elementName] = element;
-  return element;
+  // Attach events to the element
+  for (const [key, value] of Object.entries(events)) {
+    // Remove existing event listener if present before adding a new one
+    if (elementEvents.has(key)) {
+      element.removeEventListener(key, elementEvents.get(key));
+    }
+
+    // Add new event listener and update the storage Map
+    element.addEventListener(key as string, value as EventListener);
+    elementEvents.set(key, value);
+  }
 }
 
 /**
@@ -60,32 +89,10 @@ export default function buildElement(tag: string, options = { id: "", classList:
   }
 
   // Set the attributes for the element
-  for (const [key, value] of Object.entries(attributes)) {
-    // Attributes like disabled, checked, selected need special handling
-    if (booleanAttributes.includes(key)) {
-      if (value) element.setAttribute(key, String(value));
-    }
-    else element.setAttribute(key, String(value));
-  }
+  setAttributes(element, attributes);
 
   // Retrieve or create the event listeners Map for this particular element
-  let elementEvents = eventListeners.get(element);
-  if (!elementEvents) {
-    elementEvents = new Map();
-    eventListeners.set(element, elementEvents);
-  }
-
-  // Attach events to the element
-  for (const [key, value] of Object.entries(events)) {
-    // Remove existing event listener if present before adding a new one
-    if (elementEvents.has(key)) {
-      element.removeEventListener(key, elementEvents.get(key));
-    }
-
-    // Add new event listener and update the storage Map
-    element.addEventListener(key as string, value as EventListener);
-    elementEvents.set(key, value);
-  }
+  handleEvents(element, events);
 
   const styleDeclaration: CSSStyleDeclaration = element.style;
   // Apply inline style to the element by converting keys from camelCase
