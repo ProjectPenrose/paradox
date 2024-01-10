@@ -1,7 +1,11 @@
+type EventCallback = (data: any) => void;
+type EventMap = { [key: string]: Set<EventCallback> };
 /**
  * PubSub class for implementing publish-subscribe pattern.
  */
 class PubSub {
+  events: EventMap;
+
   constructor() {
     this.events = {};
   }
@@ -12,13 +16,13 @@ class PubSub {
    * @param {function} callback - The callback function to be executed when the event is published.
    * @returns {number} - The number of callbacks subscribed to the event.
    */
-  subscribe(event, callback) {
+  subscribe(event: string, callback: EventCallback): Set<EventCallback> {
     let self = this;
     if (!self.events.hasOwnProperty(event)) {
-      self.events[event] = [];
+      self.events[event] = new Set();
     }
 
-    return self.events[event].push(callback);
+    return self.events[event].add(callback);
   }
 
   /**
@@ -27,13 +31,13 @@ class PubSub {
    * @param {function} callback - The callback function to be removed from the subscribers.
    * @returns {array} - An array of callbacks that remain subscribed to the event.
    */
-  unsubscribe(event, callback) {
+  unsubscribe(event: string, callback: EventCallback): Set<EventCallback> {
     let self = this;
     if (!self.events.hasOwnProperty(event)) {
-      return 0;
+      self.events[event].delete(callback);
     }
 
-    return self.events[event].filter((cb) => cb !== callback);
+    return self.events[event];
   }
 
   /**
@@ -42,13 +46,20 @@ class PubSub {
    * @param {object} [data={}] - The data to be passed to the event subscribers.
    * @returns {array} - An array of return values from the event subscribers.
    */
-  publish(event, data = {}) {
+  publish(event: string, data: object = {}): Array<any> {
     let self = this;
     if (!self.events.hasOwnProperty(event)) {
       return [];
     }
 
-    return self.events[event].map((callback) => callback(data));
+    return [...self.events[event]].map((callback) => {
+      try {
+        return callback(data);
+      } catch (e) {
+        console.warn(e);
+        return null;
+      }
+    });
   }
 }
 

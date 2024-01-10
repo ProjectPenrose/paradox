@@ -1,8 +1,8 @@
 {
   "name": "penrose-paradox",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "build/index.js",
   "scripts": {
     "paradox-app": "node paradoxApp.js && npm run dev",
     "dev": "concurrently \"npm run webpack\" \"npm run sass\" \"npm run server\"",
@@ -29,6 +29,7 @@
     "nodemon": "^3.0.2",
     "sass": "^1.69.5",
     "terser-webpack-plugin": "^5.3.9",
+    "typescript": "^5.3.3",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
   }
