@@ -52,7 +52,14 @@ class PubSub {
       return [];
     }
 
-    return self.events[event].map((callback) => callback(data));
+    return self.events[event].map((callback) => {
+      try {
+        return callback(data);
+      } catch (e) {
+        console.warn(e);
+        return null;
+      }
+    });
   }
 }
 
