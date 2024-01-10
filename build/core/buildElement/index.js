@@ -4,83 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const getText_1 = __importDefault(require("./helpers/getText"));
-const getStyleKey_1 = __importDefault(require("./helpers/getStyleKey"));
-const elementsCache = {};
-function createElement(elementName) {
-    if (elementsCache[elementName])
-        return elementsCache[elementName].cloneNode();
-    const element = document.createElement(elementName);
-    elementsCache[elementName] = element;
-    return element;
-}
-// List of boolean attributes that need special handling
-const booleanAttributes = [
-    "disabled",
-    "checked",
-    "selected",
-    "readonly",
-    "required",
-    "multiple",
-    "autofocus",
-    "formnovalidate",
-    "autocompleted",
-];
-function setAttributes(element, attributes) {
-    for (const [key, value] of Object.entries(attributes)) {
-        // Attributes like disabled, checked, selected need special handling
-        if (booleanAttributes.includes(key)) {
-            if (value)
-                element.setAttribute(key, String(value));
-        }
-        else
-            element.setAttribute(key, String(value));
-    }
-}
-// WeakMap to store event listeners for each element
-const eventListeners = new WeakMap();
-function handleEvents(element, events) {
-    // Retrieve or create the event listeners Map for this particular element
-    let elementEvents = eventListeners.get(element);
-    if (!elementEvents) {
-        elementEvents = new Map();
-        eventListeners.set(element, elementEvents);
-    }
-    // Attach events to the element
-    for (const [key, value] of Object.entries(events)) {
-        // Remove existing event listener if present before adding a new one
-        if (elementEvents.has(key)) {
-            element.removeEventListener(key, elementEvents.get(key));
-        }
-        // Add new event listener and update the storage Map
-        element.addEventListener(key, value);
-        elementEvents.set(key, value);
-    }
-}
-function applyStyles(element, style) {
-    const styleDeclaration = element.style;
-    // Apply inline style to the element by converting keys from camelCase
-    for (const [key, value] of Object.entries(style)) {
-        const styleKey = (0, getStyleKey_1.default)(key);
-        styleDeclaration.setProperty(styleKey, value);
-    }
-}
-function appendChildren(element, children, buildElement) {
-    // Create a Document Fragment to efficiently append children
-    const fragment = document.createDocumentFragment();
-    // Append each child to the fragment
-    if (children) {
-        for (const child of children) {
-            // Skip if child is not valid
-            if (!child)
-                continue;
-            // Recursively build and append child element
-            const { tag, options } = child;
-            fragment.append(buildElement(tag, options));
-        }
-        // Append all children at once to the parent element
-        element.append(fragment);
-    }
-}
+const createElement_1 = __importDefault(require("./helpers/createElement"));
+const setAttributes_1 = __importDefault(require("./helpers/setAttributes"));
+const handleEvents_1 = __importDefault(require("./helpers/handleEvents"));
+const applyStyles_1 = __importDefault(require("./helpers/applyStyles"));
+const appendChildren_1 = __importDefault(require("./helpers/appendChildren"));
 /**
  * Builds and returns an HTML element based on the provided tag and options.
  *
@@ -102,7 +30,7 @@ function buildElement(tag, options = { id: "", classList: "", children: [], attr
     // Destructure and provide default values for the options parameter
     const { id = "", classList = "", children = [], attributes = {}, events = {}, text = "", style = {} } = options;
     // Create a new HTML element
-    const element = createElement(tag);
+    const element = (0, createElement_1.default)(tag);
     // Set the element ID if provided
     if (id)
         element.id = id.trim();
@@ -114,16 +42,16 @@ function buildElement(tag, options = { id: "", classList: "", children: [], attr
         }
     }
     // Set the attributes for the element
-    setAttributes(element, attributes);
+    (0, setAttributes_1.default)(element, attributes);
     // Retrieve or create the event listeners Map for this particular element
-    handleEvents(element, events);
+    (0, handleEvents_1.default)(element, events);
     // Apply inline styles to the element
-    applyStyles(element, style);
+    (0, applyStyles_1.default)(element, style);
     // Set the text content of the element after processing
     if (text)
         element.textContent = (0, getText_1.default)(text);
     // Append children to the element
-    appendChildren(element, children, buildElement);
+    (0, appendChildren_1.default)(element, children, buildElement);
     // Return the fully constructed element
     return element;
 }

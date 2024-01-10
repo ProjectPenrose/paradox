@@ -1,86 +1,9 @@
 import getText from "./helpers/getText";
-import getStyleKey from "./helpers/getStyleKey";
-
-const elementsCache: { [key: string]: HTMLElement } = {};
-function createElement(elementName: string) : HTMLElement {
-  if (elementsCache[elementName]) return elementsCache[elementName].cloneNode() as HTMLElement;
-  const element = document.createElement(elementName);
-  elementsCache[elementName] = element;
-  return element;
-}
-
-// List of boolean attributes that need special handling
-const booleanAttributes = [
-  "disabled",
-  "checked",
-  "selected",
-  "readonly",
-  "required",
-  "multiple",
-  "autofocus",
-  "formnovalidate",
-  "autocompleted",
-];
-function setAttributes(element: HTMLElement, attributes: { [key: string]: string }) {
-  for (const [key, value] of Object.entries(attributes)) {
-    // Attributes like disabled, checked, selected need special handling
-    if (booleanAttributes.includes(key)) {
-      if (value) element.setAttribute(key, String(value));
-    }
-    else element.setAttribute(key, String(value));
-  }
-}
-
-// WeakMap to store event listeners for each element
-const eventListeners = new WeakMap();
-function handleEvents(element: HTMLElement, events: { [key: string]: EventListener }) {
-  // Retrieve or create the event listeners Map for this particular element
-  let elementEvents = eventListeners.get(element);
-  if (!elementEvents) {
-    elementEvents = new Map();
-    eventListeners.set(element, elementEvents);
-  }
-
-  // Attach events to the element
-  for (const [key, value] of Object.entries(events)) {
-    // Remove existing event listener if present before adding a new one
-    if (elementEvents.has(key)) {
-      element.removeEventListener(key, elementEvents.get(key));
-    }
-
-    // Add new event listener and update the storage Map
-    element.addEventListener(key as string, value as EventListener);
-    elementEvents.set(key, value);
-  }
-}
-
-function applyStyles(element: HTMLElement, style: { [key: string]: string }) {
-  const styleDeclaration: CSSStyleDeclaration = element.style;
-  // Apply inline style to the element by converting keys from camelCase
-  for (const [key, value] of Object.entries(style)) {
-    const styleKey = getStyleKey(key) as string;
-    styleDeclaration.setProperty(styleKey, value as string);
-  }
-}
-
-function appendChildren(element: HTMLElement, children: Array<any>, buildElement: Function) {
-  // Create a Document Fragment to efficiently append children
-  const fragment = document.createDocumentFragment();
-
-  // Append each child to the fragment
-  if (children) {
-    for (const child of children) {
-      // Skip if child is not valid
-      if (!child) continue;
-      // Recursively build and append child element
-      const { tag, options } = child;
-      fragment.append(buildElement(tag, options));
-    }
-
-    // Append all children at once to the parent element
-    element.append(fragment);
-  }
-}
+import createElement from "./helpers/createElement";
+import setAttributes from "./helpers/setAttributes";
+import handleEvents from "./helpers/handleEvents";
+import applyStyles from "./helpers/applyStyles";
+import appendChildren from "./helpers/appendChildren";
 
 /**
  * Builds and returns an HTML element based on the provided tag and options.
