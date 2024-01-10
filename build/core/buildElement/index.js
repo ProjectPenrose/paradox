@@ -3,8 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const getText_1 = __importDefault(require("./buildElement/helpers/getText"));
-const getStyleKey_1 = __importDefault(require("./buildElement/helpers/getStyleKey"));
+const getText_1 = __importDefault(require("./helpers/getText"));
+const getStyleKey_1 = __importDefault(require("./helpers/getStyleKey"));
 // WeakMap to store event listeners for each element
 const eventListeners = new WeakMap();
 /**
