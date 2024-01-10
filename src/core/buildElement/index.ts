@@ -2,7 +2,6 @@ import getText from "./helpers/getText";
 import getStyleKey from "./helpers/getStyleKey";
 
 const elementsCache: { [key: string]: HTMLElement } = {};
-
 function createElement(elementName: string) : HTMLElement {
   if (elementsCache[elementName]) return elementsCache[elementName].cloneNode() as HTMLElement;
   const element = document.createElement(elementName);
@@ -55,6 +54,34 @@ function handleEvents(element: HTMLElement, events: { [key: string]: EventListen
   }
 }
 
+function applyStyles(element: HTMLElement, style: { [key: string]: string }) {
+  const styleDeclaration: CSSStyleDeclaration = element.style;
+  // Apply inline style to the element by converting keys from camelCase
+  for (const [key, value] of Object.entries(style)) {
+    const styleKey = getStyleKey(key) as string;
+    styleDeclaration.setProperty(styleKey, value as string);
+  }
+}
+
+function appendChildren(element: HTMLElement, children: Array<any>, buildElement: Function) {
+  // Create a Document Fragment to efficiently append children
+  const fragment = document.createDocumentFragment();
+
+  // Append each child to the fragment
+  if (children) {
+    for (const child of children) {
+      // Skip if child is not valid
+      if (!child) continue;
+      // Recursively build and append child element
+      const { tag, options } = child;
+      fragment.append(buildElement(tag, options));
+    }
+
+    // Append all children at once to the parent element
+    element.append(fragment);
+  }
+}
+
 /**
  * Builds and returns an HTML element based on the provided tag and options.
  *
@@ -94,32 +121,14 @@ export default function buildElement(tag: string, options = { id: "", classList:
   // Retrieve or create the event listeners Map for this particular element
   handleEvents(element, events);
 
-  const styleDeclaration: CSSStyleDeclaration = element.style;
-  // Apply inline style to the element by converting keys from camelCase
-  for (const [key, value] of Object.entries(style)) {
-    const styleKey = getStyleKey(key) as string;
-    styleDeclaration.setProperty(styleKey, value as string);
-  }
+  // Apply inline styles to the element
+  applyStyles(element, style);
 
   // Set the text content of the element after processing
   if (text) element.textContent = getText(text);
   
-  // Create a Document Fragment to efficiently append children
-  const fragment = document.createDocumentFragment();
-
-  // Append each child to the fragment
-  if (children) {
-    for (const child of children) {
-      // Skip if child is not valid
-      if (!child) continue;
-      // Recursively build and append child element
-      const { tag, options } = child;
-      fragment.append(buildElement(tag, options));
-    }
-
-    // Append all children at once to the parent element
-    element.append(fragment);
-  }
+  // Append children to the element
+  appendChildren(element, children, buildElement);
 
   // Return the fully constructed element
   return element;

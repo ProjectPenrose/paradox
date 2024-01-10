@@ -56,6 +56,31 @@ function handleEvents(element, events) {
         elementEvents.set(key, value);
     }
 }
+function applyStyles(element, style) {
+    const styleDeclaration = element.style;
+    // Apply inline style to the element by converting keys from camelCase
+    for (const [key, value] of Object.entries(style)) {
+        const styleKey = (0, getStyleKey_1.default)(key);
+        styleDeclaration.setProperty(styleKey, value);
+    }
+}
+function appendChildren(element, children, buildElement) {
+    // Create a Document Fragment to efficiently append children
+    const fragment = document.createDocumentFragment();
+    // Append each child to the fragment
+    if (children) {
+        for (const child of children) {
+            // Skip if child is not valid
+            if (!child)
+                continue;
+            // Recursively build and append child element
+            const { tag, options } = child;
+            fragment.append(buildElement(tag, options));
+        }
+        // Append all children at once to the parent element
+        element.append(fragment);
+    }
+}
 /**
  * Builds and returns an HTML element based on the provided tag and options.
  *
@@ -92,30 +117,13 @@ function buildElement(tag, options = { id: "", classList: "", children: [], attr
     setAttributes(element, attributes);
     // Retrieve or create the event listeners Map for this particular element
     handleEvents(element, events);
-    const styleDeclaration = element.style;
-    // Apply inline style to the element by converting keys from camelCase
-    for (const [key, value] of Object.entries(style)) {
-        const styleKey = (0, getStyleKey_1.default)(key);
-        styleDeclaration.setProperty(styleKey, value);
-    }
+    // Apply inline styles to the element
+    applyStyles(element, style);
     // Set the text content of the element after processing
     if (text)
         element.textContent = (0, getText_1.default)(text);
-    // Create a Document Fragment to efficiently append children
-    const fragment = document.createDocumentFragment();
-    // Append each child to the fragment
-    if (children) {
-        for (const child of children) {
-            // Skip if child is not valid
-            if (!child)
-                continue;
-            // Recursively build and append child element
-            const { tag, options } = child;
-            fragment.append(buildElement(tag, options));
-        }
-        // Append all children at once to the parent element
-        element.append(fragment);
-    }
+    // Append children to the element
+    appendChildren(element, children, buildElement);
     // Return the fully constructed element
     return element;
 }
