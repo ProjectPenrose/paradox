@@ -17,6 +17,15 @@ const booleanAttributes = [
   "autocompleted",
 ];
 
+const elementsCache: { [key: string]: HTMLElement } = {};
+
+function createElement(elementName: string) : HTMLElement {
+  if (elementsCache[elementName]) return elementsCache[elementName].cloneNode() as HTMLElement;
+  const element = document.createElement(elementName);
+  elementsCache[elementName] = element;
+  return element;
+}
+
 /**
  * Builds and returns an HTML element based on the provided tag and options.
  *
@@ -38,7 +47,7 @@ export default function buildElement(tag: string, options = { id: "", classList:
   const { id = "", classList = "", children = [], attributes = {}, events = {}, text = "", style = {} } = options;
 
   // Create a new HTML element
-  const element = document.createElement(tag);
+  const element = createElement(tag);
 
   // Set the element ID if provided
   if (id) element.id = id.trim();

@@ -19,6 +19,14 @@ const booleanAttributes = [
     "formnovalidate",
     "autocompleted",
 ];
+const elementsCache = {};
+function createElement(elementName) {
+    if (elementsCache[elementName])
+        return elementsCache[elementName].cloneNode();
+    const element = document.createElement(elementName);
+    elementsCache[elementName] = element;
+    return element;
+}
 /**
  * Builds and returns an HTML element based on the provided tag and options.
  *
@@ -40,7 +48,7 @@ function buildElement(tag, options = { id: "", classList: "", children: [], attr
     // Destructure and provide default values for the options parameter
     const { id = "", classList = "", children = [], attributes = {}, events = {}, text = "", style = {} } = options;
     // Create a new HTML element
-    const element = document.createElement(tag);
+    const element = createElement(tag);
     // Set the element ID if provided
     if (id)
         element.id = id.trim();
