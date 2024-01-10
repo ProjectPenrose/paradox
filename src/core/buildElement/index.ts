@@ -33,7 +33,7 @@ export default function buildElement(tag: string, options = { id: "", classList:
   // Add class(es) to the element if any are provided
   if (classList) {
     for (let className of classList.split(" ")) {
-      if (className) element.classList.add(className);
+      if (className) element.classList.add(className.trim());
     }
   }
 

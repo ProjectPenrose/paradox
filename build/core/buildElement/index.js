@@ -36,7 +36,7 @@ function buildElement(tag, options = { id: "", classList: "", children: [], attr
     if (classList) {
         for (let className of classList.split(" ")) {
             if (className)
-                element.classList.add(className);
+                element.classList.add(className.trim());
         }
     }
     // Set the attributes for the element
