@@ -157,7 +157,7 @@ If you want to use it as a module in a simple html project, you should import it
 
 ```html
 <script type="module">
-  import Paradox from "path/to/paradox/src/index.js";
+  import Paradox from "path/to/paradox/build/index.js";
 </script>
 ```
 
