@@ -4,21 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const getText_1 = __importDefault(require("./helpers/getText"));
-// Object for caching converted style keys
-const memoizedStyleKeys = {};
-// Function to convert camelCase into kebab-case for CSS properties
-function getStyleKey(key = "") {
-    // Check if the key is already processed and return the cached value if so
-    if (memoizedStyleKeys[key] !== undefined) {
-        return memoizedStyleKeys[key];
-    }
-    // Convert camelCase to kebab-case
-    const styleKey = key.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
-    // Store the result in cache
-    memoizedStyleKeys[key] = styleKey;
-    // Return the converted key
-    return styleKey;
-}
+const getStyleKey_1 = __importDefault(require("./helpers/getStyleKey"));
 // WeakMap to store event listeners for each element
 const eventListeners = new WeakMap();
 /**
@@ -82,7 +68,7 @@ function buildElement(tag, options = { id: "", classList: "", children: [], attr
     const styleDeclaration = element.style;
     // Apply inline style to the element by converting keys from camelCase
     for (const [key, value] of Object.entries(style)) {
-        const styleKey = getStyleKey(key);
+        const styleKey = (0, getStyleKey_1.default)(key);
         styleDeclaration.setProperty(styleKey, value);
     }
     // Set the text content of the element after processing
