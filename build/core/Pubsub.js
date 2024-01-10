@@ -16,9 +16,9 @@ class PubSub {
     subscribe(event, callback) {
         let self = this;
         if (!self.events.hasOwnProperty(event)) {
-            self.events[event] = [];
+            self.events[event] = new Set();
         }
-        return self.events[event].push(callback);
+        return self.events[event].add(callback);
     }
     /**
      * Unsubscribe from an event.
@@ -29,9 +29,9 @@ class PubSub {
     unsubscribe(event, callback) {
         let self = this;
         if (!self.events.hasOwnProperty(event)) {
-            self.events[event] = self.events[event].filter((cb) => cb !== callback);
+            self.events[event].delete(callback);
         }
-        return self.events[event].filter((cb) => cb !== callback);
+        return self.events[event];
     }
     /**
      * Publish an event.
@@ -44,7 +44,7 @@ class PubSub {
         if (!self.events.hasOwnProperty(event)) {
             return [];
         }
-        return self.events[event].map((callback) => {
+        return [...self.events[event]].map((callback) => {
             try {
                 return callback(data);
             }
