@@ -8,7 +8,7 @@ if (!fs.existsSync(path.join(__dirname, "app"))) {
   // create app.js
   fs.writeFileSync(
     path.join(__dirname, "app", "app.js"),
-    `import Paradox from "../src"; // Import the Paradox module.
+    `import Paradox from "../build"; // Import the Paradox module.
 
     const baseUrl = "http://127.0.0.1:3040"; // This is the url of the client app and it is used to redirect the user to the appropriate route.
     const root = document.querySelector("#root"); // This is the root element where the app will be rendered.
