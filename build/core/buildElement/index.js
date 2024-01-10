@@ -31,7 +31,7 @@ function buildElement(tag, options = { id: "", classList: "", children: [], attr
     const element = document.createElement(tag);
     // Set the element ID if provided
     if (id)
-        element.id = id;
+        element.id = id.trim();
     // Add class(es) to the element if any are provided
     if (classList) {
         for (let className of classList.split(" ")) {

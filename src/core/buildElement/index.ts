@@ -28,7 +28,7 @@ export default function buildElement(tag: string, options = { id: "", classList:
   const element = document.createElement(tag);
 
   // Set the element ID if provided
-  if (id) element.id = id;
+  if (id) element.id = id.trim();
 
   // Add class(es) to the element if any are provided
   if (classList) {
