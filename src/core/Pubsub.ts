@@ -1,8 +1,10 @@
+type EventCallback = (data: any) => void;
+type EventMap = { [key: string]: EventCallback[] };
 /**
  * PubSub class for implementing publish-subscribe pattern.
  */
 class PubSub {
-  events: { [key: string]: Function[] };
+  events: EventMap;
 
   constructor() {
     this.events = {};
@@ -14,7 +16,7 @@ class PubSub {
    * @param {function} callback - The callback function to be executed when the event is published.
    * @returns {number} - The number of callbacks subscribed to the event.
    */
-  subscribe(event: string, callback: Function): number {
+  subscribe(event: string, callback: EventCallback): number {
     let self = this;
     if (!self.events.hasOwnProperty(event)) {
       self.events[event] = [];
@@ -29,7 +31,7 @@ class PubSub {
    * @param {function} callback - The callback function to be removed from the subscribers.
    * @returns {array} - An array of callbacks that remain subscribed to the event.
    */
-  unsubscribe(event: string, callback: Function): Array<any> {
+  unsubscribe(event: string, callback: EventCallback): Array<any> {
     let self = this;
     if (!self.events.hasOwnProperty(event)) {
       self.events[event] = [];
