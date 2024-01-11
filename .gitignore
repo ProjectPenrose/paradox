@@ -1,11 +1,4 @@
-node_modules
-dist
+node_modules/
+dist/
 .env
 src2/
-babel.config.json
-browserslist
-webpack.config.js
-.env-example
-scss/
-server/
-app/
