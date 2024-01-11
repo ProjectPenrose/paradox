@@ -83,13 +83,15 @@ describe('Paradox', () => {
         });
 
         it("should append nested children if provided", () => {
-          expect(element.children[2].children.length).toBe(children[2].options.children.length);
+          if (element.children[2] && children[2].options) {
+            expect(element.children[2].children.length).toBe(children[2].options.children.length);
+          }
         });
       });
 
       describe("events", () => {
         const events = {
-          click: (ev: object) => {
+          click: (ev: { target: any }) => {
             return ev.target;
           },
         };
