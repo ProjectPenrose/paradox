@@ -48,18 +48,32 @@ class PubSub {
    */
   publish(event: string, data: object = {}): Array<any> {
     let self = this;
-    if (!self.events.hasOwnProperty(event)) {
-      return [];
+    let results = [];
+    if (self.events.hasOwnProperty(event)) {
+      let eventResults = [...self.events[event]].map((callback) => {
+        try {
+          return callback(data);
+        } catch (e) {
+          console.warn(e);
+          return null;
+        }
+      });
+      results.push(eventResults);
     }
 
-    return [...self.events[event]].map((callback) => {
-      try {
-        return callback(data);
-      } catch (e) {
-        console.warn(e);
-        return null;
-      }
-    });
+    if (self.events.hasOwnProperty("*")) {
+      let eventResults = [...self.events["*"]].map((callback) => {
+        try {
+          return callback(data);
+        } catch (e) {
+          console.warn(e);
+          return null;
+        }
+      });
+      results.push(eventResults);
+    }
+
+    return results;
   }
 }
 
