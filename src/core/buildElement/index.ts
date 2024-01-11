@@ -19,7 +19,19 @@ import appendChildren from "./helpers/appendChildren";
  * @param {Object} [options.style={}] - The key-value pairs of inline styles for the element.
  * @returns {HTMLElement} - The constructed HTML element.
  */
-export default function buildElement(tag: string, options = { id: "", classList: "", children: [], attributes: {}, events: {}, text: "", style: {} }) {
+export default function buildElement(
+  tag: string,
+  options: {
+    id?: string;
+    classList?: string;
+    children?: object[];
+    attributes?: { [key: string]: string };
+    events?: { [key: string]: EventListener };
+    text?: string;
+    style?: { [key: string]: string };
+  
+  } = { id: "", classList: "", children: [], attributes: {}, events: {}, text: "", style: {} }
+) {
   // Return empty string if tag is not provided
   if (!tag) throw new Error("Tag is required");
   // Destructure and provide default values for the options parameter

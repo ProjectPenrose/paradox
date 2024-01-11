@@ -57,7 +57,7 @@ describe('Paradox', () => {
 
       it("should set inline styles if provided", () => {
         for (let [key, value] of Object.entries(options.style)) {
-          expect(element.style[key]).toBe(value);
+          expect((element.style as any)[key]).toBe(value);
         }
       });
 
