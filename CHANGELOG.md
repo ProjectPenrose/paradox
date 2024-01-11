@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.4] - 2024-01-11
+### Added
+- Tests for `Paradox.Router`
+- Tests for `Paradox.pubsub`
+- Paradox app example
+
+## [0.3.3] - 2024-01-11
+### Changed
+- Folder structure
+    - Added `tests` folder to `src`
+    - Added `types` folder
+- Changed `package.json` to include `types` folder, `ts-module`, and `typescript`
+
+## [0.3.2] - 2024-01-11
+### Added
+- Unit tests for `Paradox.buildElement`
+- ROADMAP.md file
+
+## [0.3.1] - 2024-01-10
+### Added
+- `Paradox.pubsub` wildcard support
+
 ## [0.3.0] - 2024-01-09
 ### Added
 - TypeScript support

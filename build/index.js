@@ -6,6 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const buildElement_1 = __importDefault(require("./core/buildElement"));
 const Router_1 = __importDefault(require("./core/Router"));
 const Pubsub_1 = __importDefault(require("./core/Pubsub"));
+/**
+ * Represents the Paradox object.
+ */
 const Paradox = {
     buildElement: buildElement_1.default,
     Router: Router_1.default,
