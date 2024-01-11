@@ -98,6 +98,65 @@ describe('Paradox', () => {
         it("should be a function", () => {
             expect(typeof Router).toBe("function");
         });
+        function Home() {
+            document.body.innerHTML = `<div>Home <a href="/about?hello=world">About</a></div>`;
+        }
+        function About() {
+            document.body.innerHTML = `<div>About <a href="/">Home</a></div>`;
+        }
+        const routes = [
+            { path: "/", component: Home },
+        ];
+        const router = new Router({ routes, baseUrl: "http://localhost" });
+        describe("Objcet properties", () => {
+            it("should have routes property", () => {
+                expect(router.hasOwnProperty("routes")).toBe(true);
+            });
+            it("should have baseUrl property", () => {
+                expect(router.hasOwnProperty("baseUrl")).toBe(true);
+            });
+            it("should have path property", () => {
+                expect(router.hasOwnProperty("path")).toBe(true);
+            });
+            it("should have queryString property", () => {
+                expect(router.hasOwnProperty("queryString")).toBe(true);
+            });
+            it("should have params property", () => {
+                expect(router.hasOwnProperty("params")).toBe(true);
+            });
+            it("should have memo property", () => {
+                expect(router.hasOwnProperty("memo")).toBe(true);
+            });
+            it("should have init method", () => {
+                expect(typeof router.init).toBe("function");
+            });
+        });
+        describe("init", () => {
+            router.init();
+            it("should set the path", () => {
+                expect(router.path).toBe("/");
+            });
+            describe("/ route", () => {
+                it("Should append the component to the DOM", () => {
+                    expect(document.body.innerHTML).toBe(`<div>Home <a href="/about?hello=world">About</a></div>`);
+                });
+                it("should set the memo", () => {
+                    expect(router.memo["/"]).toBeDefined();
+                });
+                it("should set the queryString", () => {
+                    expect(router.queryString).toBe("");
+                });
+                it("should set the params", () => {
+                    expect(router.params.size).toBe(0);
+                });
+                it("should set the query", () => {
+                    expect(router.query.toString()).toBe("");
+                });
+                it("should set the props", () => {
+                    expect(router.routes[0].props).toBeDefined();
+                });
+            });
+        });
     });
     it('should have pubsub property', () => {
         expect(index_1.default.hasOwnProperty("pubsub")).toBe(true);
