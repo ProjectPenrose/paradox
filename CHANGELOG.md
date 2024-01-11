@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.2] - 2024-01-11
+### Added
+- Unit tests for `Paradox.buildElement`
+- ROADMAP.md file
+
 ## [0.3.1] - 2024-01-10
 ### Added
 - `Paradox.pubsub` wildcard support
