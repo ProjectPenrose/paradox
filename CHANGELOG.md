@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.3] - 2024-01-11
+### Changed
+- Folder structure
+    - Added `tests` folder to `src`
+    - Added `types` folder
+- Changed `package.json` to include `types` folder, `ts-module`, and `typescript`
+
 ## [0.3.2] - 2024-01-11
 ### Added
 - Unit tests for `Paradox.buildElement`

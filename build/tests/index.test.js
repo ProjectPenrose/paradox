@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const index_1 = __importDefault(require("./index"));
+const index_1 = __importDefault(require("../index"));
 const { buildElement, Router, pubsub } = index_1.default;
 describe('Paradox', () => {
     it("should be an object", () => {
