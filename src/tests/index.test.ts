@@ -219,5 +219,109 @@ describe('Paradox', () => {
     it("should have publish method", () => {
       expect(typeof pubsub.publish).toBe("function");
     });
+  
+    it("should initialize with an empty events object", () => {
+      expect(pubsub.events).toEqual({});
+    });
+  
+    describe("subscribe", () => {
+      it("should add a callback to the specified event", () => {
+        const event = "testEvent";
+        const callback = jest.fn();
+  
+        pubsub.subscribe(event, callback);
+  
+        expect(pubsub.events[event]).toBeDefined();
+        expect(pubsub.events[event].size).toBe(1);
+        expect(pubsub.events[event].has(callback)).toBe(true);
+      });
+  
+      it("should return the number of callbacks subscribed to the event", () => {
+        const event = "testEvent";
+        const callback1 = jest.fn();
+        const callback2 = jest.fn();
+  
+        const result1 = pubsub.subscribe(event, callback1);
+        const result2 = pubsub.subscribe(event, callback2);
+  
+        expect(result1).toBe(1);
+        expect(result2).toBe(2);
+      });
+    });
+  
+    describe("unsubscribe", () => {
+      it("should remove a callback from the specified event", () => {
+        const event = "testEvent";
+        const callback = jest.fn();
+  
+        pubsub.subscribe(event, callback);
+        pubsub.unsubscribe(event, callback);
+  
+        expect(pubsub.events[event]).toBeDefined();
+        expect(pubsub.events[event].size).toBe(0);
+        expect(pubsub.events[event].has(callback)).toBe(false);
+      });
+  
+      it("should return the remaining callbacks subscribed to the event", () => {
+        const event = "testEvent";
+        const callback1 = jest.fn();
+        const callback2 = jest.fn();
+  
+        pubsub.subscribe(event, callback1);
+        pubsub.subscribe(event, callback2);
+  
+        const result = pubsub.unsubscribe(event, callback1);
+  
+        expect(result).toEqual(new Set([callback2]));
+      });
+    });
+  
+    describe("publish", () => {
+      it("should call the callbacks subscribed to the specified event", () => {
+        const event = "testEvent";
+        const callback1 = jest.fn();
+        const callback2 = jest.fn();
+        const data = { message: "Hello, world!" };
+  
+        pubsub.subscribe(event, callback1);
+        pubsub.subscribe(event, callback2);
+  
+        pubsub.publish(event, data);
+  
+        expect(callback1).toHaveBeenCalledWith(data);
+        expect(callback2).toHaveBeenCalledWith(data);
+      });
+  
+      it("should return an array of return values from the event subscribers", () => {
+        const event = "testEvent";
+        const callback1 = jest.fn(() => "result1");
+        const callback2 = jest.fn(() => "result2");
+        const data = { message: "Hello, world!" };
+  
+        pubsub.subscribe(event, callback1);
+        pubsub.subscribe(event, callback2);
+  
+        const result = pubsub.publish(event, data);
+  
+        expect(result).toEqual(["result1", "result2"]);
+      });
+  
+      it("should call the callbacks subscribed to the wildcard event (*)", () => {
+        const event = "testEvent";
+        const wildcardEvent = "*";
+        const callback1 = jest.fn();
+        const callback2 = jest.fn();
+        const data = { message: "Hello, world!" };
+  
+        pubsub.subscribe(event, callback1);
+        pubsub.subscribe(wildcardEvent, callback2);
+  
+        pubsub.publish(event, data);
+  
+        expect(callback1).toHaveBeenCalledWith(data);
+        expect(callback2).toHaveBeenCalledWith(data);
+      });
+    });
+    
   });
 });
