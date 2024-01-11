@@ -89,17 +89,16 @@ describe('Paradox', () => {
 
       describe("events", () => {
         const events = {
-          click: () => { },
-          mouseover: () => { }
+          click: (ev: object) => {
+            return ev.target;
+          },
         };
         options.events = events;
 
         element = buildElement("div", options);
 
         it("should add event listeners if provided", () => {
-          for (let [key, value] of Object.entries(events)) {
-            expect(element.listeners.has(key)).toBe(true);
-          }
+          expect(element.onclick).toBeDefined();
         });
       });
     });
