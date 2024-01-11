@@ -48,7 +48,7 @@ class PubSub {
    */
   publish(event: string, data: object = {}): Array<any> {
     let self = this;
-    let results = [];
+    let results: (void | null)[][] = [];
     if (self.events.hasOwnProperty(event)) {
       let eventResults = [...self.events[event]].map((callback) => {
         try {
