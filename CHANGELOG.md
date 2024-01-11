@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2024-01-10
+### Added
+- `Paradox.pubsub` wildcard support
+
 ## [0.3.0] - 2024-01-09
 ### Added
 - TypeScript support
