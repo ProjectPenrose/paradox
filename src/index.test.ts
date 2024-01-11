@@ -15,6 +15,11 @@ describe('Paradox', () => {
     it("should be a function", () => {
       expect(typeof buildElement).toBe("function");
     });
+
+    it ("should return an HTMLElement", () => {
+      let element = buildElement("div");
+      expect(element instanceof HTMLElement).toBe(true);
+    });
   });
 
   it('should have Router property', () => {
