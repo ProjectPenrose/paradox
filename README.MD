@@ -343,7 +343,9 @@ Santiago Rincon - [@alexsc6955](https://linkedin.com/in/alexsc6955)
 
 ## Roadmap
 
-See the [open issues](https://github.com/ProjectPenrose/paradox/issues) for a list of proposed features (and known issues).
+See the [ROADMAP.md](https://github.com/ProjectPenrose/paradox/ROADMAP.md) for a list of proposed features (and known issues).
+
+If you have any ideas, please [start a discussion](https://github.com/ProjectPenrose/paradox/discussions/categories/ideas) and we can figure it out together.
 
 ## Acknowledgements
 
