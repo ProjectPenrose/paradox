@@ -1,4 +1,4 @@
-import Paradox from "./index";
+import Paradox from "../index";
 
 const { buildElement, Router, pubsub } = Paradox;
 

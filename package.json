@@ -1,22 +1,31 @@
 {
   "name": "penrose-paradox",
   "version": "0.3.2",
-  "description": "",
+  "description": "Simple vanilla JavaScript library for beginners",
+  "keywords": [
+    "penrose",
+    "paradox",
+    "javascript",
+    "DOM manipulation",
+    "library",
+    "beginner"
+  ],
+  "author": {
+    "name": "Santiago Rincón",
+    "email": "rincorpes@gmail.com"
+  },
   "main": "build/index.js",
-  "scripts": {
-    "test": "jest build",
-    "paradox-app": "node paradoxApp.js && npm run dev",
-    "dev": "concurrently \"npm run webpack\" \"npm run sass\" \"npm run server\"",
-    "server": "nodemon server/index.js",
-    "webpack": "webpack-cli -w --config ./webpack.config.js --mode development --env=development",
-    "sass": "sass -w scss/main.scss dist/css/style.css"
-  },
-  "jest": {
-    "testEnvironment": "jsdom"
-  },
-  "keywords": [],
-  "author": "",
+  "module": "build/index.js",
+  "types": "types/index.d.ts",
+  "ts-module": "src/index.ts",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ProjectPenrose/paradox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ProjectPenrose/paradox/issues"
+  },
   "devDependencies": {
     "@babel/cli": "^7.23.4",
     "@babel/core": "^7.23.3",
@@ -38,5 +47,13 @@
     "typescript": "^5.3.3",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest build",
+    "dev": "tsc -w"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
   }
 }
