@@ -2,7 +2,7 @@ import Paradox from "../../../build";
 
 
 
-const baseUrl = "http://127.0.0.1:3040"; // This is the url of the client app and it is used to redirect the user to the appropriate route.
+const baseUrl = "http://localhost:3040"; // This is the url of the client app and it is used to redirect the user to the appropriate route.
 const root = document.querySelector("#root"); // This is the root element where the app will be rendered.
 
 // Define the MessageContainer component.
