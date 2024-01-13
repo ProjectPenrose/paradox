@@ -32,11 +32,12 @@ class PubSub {
    * @returns {array} - An array of callbacks that remain subscribed to the event.
    */
   unsubscribe(event: string, callback: EventCallback): Set<EventCallback> {
-    let self = this;
-    if (!self.events.hasOwnProperty(event)) {
+    let self = this;    
+    if (self.events.hasOwnProperty(event)) {
       self.events[event].delete(callback);
+    } else {
+      console.warn(`Event ${event} does not exist`);
     }
-
     return self.events[event];
   }
 

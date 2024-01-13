@@ -28,8 +28,11 @@ class PubSub {
      */
     unsubscribe(event, callback) {
         let self = this;
-        if (!self.events.hasOwnProperty(event)) {
+        if (self.events.hasOwnProperty(event)) {
             self.events[event].delete(callback);
+        }
+        else {
+            console.warn(`Event ${event} does not exist`);
         }
         return self.events[event];
     }
