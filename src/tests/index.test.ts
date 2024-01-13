@@ -281,7 +281,6 @@ describe('Paradox', () => {
         pubsub.subscribe(event, callback2);
   
         const result = pubsub.publish(event, data);
-        console.log(result);
   
         expect(result.sort()).toEqual(["result1", "result2"]);
       });

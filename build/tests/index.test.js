@@ -225,7 +225,6 @@ describe('Paradox', () => {
                 pubsub.subscribe(event, callback1);
                 pubsub.subscribe(event, callback2);
                 const result = pubsub.publish(event, data);
-                console.log(result);
                 expect(result.sort()).toEqual(["result1", "result2"]);
             });
             it("should call the callbacks subscribed to the wildcard event (*)", () => {
