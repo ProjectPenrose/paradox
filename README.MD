@@ -7,13 +7,17 @@
     Paradox is just a simple vanilla javascript library for DOM manipulation.
     <br>
     Hopefully it will ease your development while learning
-    <br />
+    <br>
     ·
     <a href="https://github.com/ProjectPenrose/paradox/labels/bug">Report Bugs</a>
     ·
     <a href="https://github.com/ProjectPenrose/paradox/labels/enhancement">Request Features</a>
   </p>
+  <p align="center">
+    <b>IMPORTANT: Things are changing a lot right now, so please be patient, this is a work in progress</b>
+  </p>
 </p>
+
 
 
 <!-- TABLE OF CONTENTS -->
@@ -33,6 +37,7 @@
   - [Build an element with `Paradox.buildElement`](#build-an-element-with-paradoxbuildelement)
   - [Routes with `Paradox.Router`](#routes-with-paradoxrouter)
   - [PubSub with `Paradox.pubsub`](#pubsub-with-paradoxpubsub)
+  - [Examples](#examples)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -328,6 +333,10 @@ Paradox.pubsub.publish("myEvent", "Hello World!");
 - Subscriptions are not persistent, so if you subscribe to an event and then navigate to another page, the subscription will be lost.
 - You can use the `Paradox.pubsub.unsubscribe` method to unsubscribe from an event.
 - You can not publish an event before subscribing to it xd.
+
+### Examples
+
+You can find some examples in the [`examples` folder.](https://github.com/ProjectPenrose/paradox/tree/main/examples/Readme.md)
 
 ## Contributing
 

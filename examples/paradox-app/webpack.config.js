@@ -1,4 +1,5 @@
 const path = require("path")
+const webpack = require("webpack")
 
 const TersePlugin = require("terser-webpack-plugin");
 
@@ -25,7 +26,11 @@ module.exports = {
       name: "common",
     },
   },
-  plugins: [],
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(process.env),
+    }),
+  ],
   stats: {
     children: true,
     errorDetails: true,

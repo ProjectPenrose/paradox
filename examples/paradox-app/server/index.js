@@ -14,8 +14,8 @@ app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "../app", "index.html"))
 })
 
-const PORT = process.env.PORT || 3040;
+const { PORT = 3040, DEV_HOST = "localhost" } = process.env || 3040;
 
-app.listen(PORT, () => {
-  console.log(`App up and runing on PORT http://127.0.0.1:${PORT}`);
+app.listen(PORT, DEV_HOST, () => {
+  console.log(`App up and runing on PORT http://${DEV_HOST}:${PORT}`);
 });

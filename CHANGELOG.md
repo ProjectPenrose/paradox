@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.5] - 2024-01-13
+### Added
+- Docs for the paradox-app example
+- Unsuscribe functionality to paradox-app example
+
+### Changed
+- paradox-app example folder structure
+
+### Fixed
+- #15: One of the `pubsub.publish` tests is failinig
+    - should return an array of return values from the event subscribers
+- #14: `pubsub.unsubscribe` tests fail
+    - should remove a callback from the specified event
+    - should return the remaining callbacks subscribed to the event
+
 ## [0.3.4] - 2024-01-11
 ### Added
 - Tests for `Paradox.Router`

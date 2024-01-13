@@ -28,8 +28,11 @@ class PubSub {
      */
     unsubscribe(event, callback) {
         let self = this;
-        if (!self.events.hasOwnProperty(event)) {
+        if (self.events.hasOwnProperty(event)) {
             self.events[event].delete(callback);
+        }
+        else {
+            console.warn(`Event ${event} does not exist`);
         }
         return self.events[event];
     }
@@ -52,7 +55,7 @@ class PubSub {
                     return null;
                 }
             });
-            results.push(eventResults);
+            eventResults.forEach((result) => results.push(result));
         }
         if (self.events.hasOwnProperty("*")) {
             let eventResults = [...self.events["*"]].map((callback) => {
@@ -64,7 +67,7 @@ class PubSub {
                     return null;
                 }
             });
-            results.push(eventResults);
+            eventResults.forEach((result) => results.push(result));
         }
         return results;
     }
