@@ -12,7 +12,7 @@ The following features are not directly related to the library itself, but are s
 
 - [ ] Improve documentation
 - [ ] Add more examples
-- [ ] Add more tests
+- [x] Add more tests
 - [ ] Finish community guidelines
 - [ ] Automate release process
 - [ ] Automate changelog generation
@@ -24,13 +24,13 @@ The following features are planned to be implemented before the first stable rel
 
 #### General
 
-- [ ] Add typescript watch mode to `npm run dev`
+- [x] Add typescript watch mode to `npm run dev`
 - [ ] Add state management support
 - [ ] Add `Paradox.app`. This will allow users to create reactive components.
 
 #### buildElement
 
-- [ ] Change the`buildElement` algorithm to ease the creation of HTML elements.
+- [ ] Change the`buildElement` algorithm to ease the creation of HTML elements by adding multiple events support and other features.
 
 #### Router
 

@@ -2,3 +2,14 @@ node_modules/
 dist/
 .env
 src2/
+src/core/app.ts
+src/core/createElement.ts
+src/core/diff.ts
+src/core/mount.ts
+src/core/render.ts
+build/core/app.js
+build/core/createElement.js
+build/core/diff.js
+build/core/mount.js
+build/core/render.js
+examples/app/pages/Reactive.js
