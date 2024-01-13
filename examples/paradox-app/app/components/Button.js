@@ -6,12 +6,15 @@ export default function Button(props = {}) {
     const { message } = props;
     Paradox.pubsub.publish("button-clicked", message);
   }
+
+  const { text = "Write message", onClick = handleClick } = props;
+
   return {
     tag: "button",
     options: {
-      text: "Write message",
+      text: text,
       events: {
-        click: handleClick
+        click: onClick
       }
     }
   }
