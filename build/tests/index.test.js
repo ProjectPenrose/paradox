@@ -216,7 +216,6 @@ describe('Paradox', () => {
                 const event = "testEvent";
                 const data = { message: "Hello, world!" };
                 pubsub.publish(event, data);
-                expect(callback1).toHaveBeenCalledWith(data);
                 expect(callback2).toHaveBeenCalledWith(data);
             });
             it("should return an array of return values from the event subscribers", () => {

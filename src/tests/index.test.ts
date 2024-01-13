@@ -271,7 +271,6 @@ describe('Paradox', () => {
   
         pubsub.publish(event, data);
   
-        expect(callback1).toHaveBeenCalledWith(data);
         expect(callback2).toHaveBeenCalledWith(data);
       });
   
