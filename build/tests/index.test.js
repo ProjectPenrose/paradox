@@ -182,8 +182,10 @@ describe('Paradox', () => {
         });
         const event = "testEvent";
         const callback = jest.fn();
-        const callback1 = jest.fn();
-        const callback2 = jest.fn();
+        const callback1 = jest.fn().mockReturnValue("result1");
+        ;
+        const callback2 = jest.fn().mockReturnValue("result2");
+        ;
         describe("subscribe", () => {
             it("should add a callback to the specified event", () => {
                 pubsub.subscribe(event, callback);
