@@ -55,7 +55,7 @@ class PubSub {
                     return null;
                 }
             });
-            results.push(eventResults);
+            eventResults.forEach((result) => results.push(result));
         }
         if (self.events.hasOwnProperty("*")) {
             let eventResults = [...self.events["*"]].map((callback) => {
@@ -67,7 +67,7 @@ class PubSub {
                     return null;
                 }
             });
-            results.push(eventResults);
+            eventResults.forEach((result) => results.push(result));
         }
         return results;
     }

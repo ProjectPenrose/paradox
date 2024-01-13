@@ -59,7 +59,7 @@ class PubSub {
           return null;
         }
       });
-      results.push(eventResults);
+      eventResults.forEach((result: any) => results.push(result));
     }
 
     if (self.events.hasOwnProperty("*")) {
@@ -71,7 +71,7 @@ class PubSub {
           return null;
         }
       });
-      results.push(eventResults);
+        eventResults.forEach((result: any) => results.push(result));
     }
 
     return results;
