@@ -7,13 +7,17 @@
     Paradox is just a simple vanilla javascript library for DOM manipulation.
     <br>
     Hopefully it will ease your development while learning
-    <br />
+    <br>
     ·
     <a href="https://github.com/ProjectPenrose/paradox/labels/bug">Report Bugs</a>
     ·
     <a href="https://github.com/ProjectPenrose/paradox/labels/enhancement">Request Features</a>
   </p>
+  <p align="center">
+    <b>IMPORTANT: Things are changing a lot right now, so please be patient, this is a work in progress</b>
+  </p>
 </p>
+
 
 
 <!-- TABLE OF CONTENTS -->
