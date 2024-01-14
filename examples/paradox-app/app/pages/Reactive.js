@@ -1,4 +1,4 @@
-import Paradox from "../../../../build";
+import app from "../../../../build/core/app";
 import createElement from "../../../../build/core/createElement";
 import render from "../../../../build/core/render";
 import mount from "../../../../build/core/mount";
@@ -6,7 +6,7 @@ import diff from "../../../../build/core/diff";
 import { addState, onStateChange } from "../../../../build/core/app";
 
 export default function Reactive () {
-  console.log("Reactive page");
+  // console.log("Reactive page");
 
   // const createVApp = (count) => createElement("div", {
   //   attrs: {
@@ -39,18 +39,20 @@ export default function Reactive () {
   // }, 1000);
 
   function Input(props = { count }) {
-    const [state, setState] = addState(props);
-    // console.log(state, setState);
+    // console.log(props);
+    const [state, setState] = addState(count);
+    console.log(state)//, setState);
 
     function handleClick() {
-      const newCount = state.count + 1;
-      setState({ count: newCount });
+      count++;
+      const newCount = count + 1;
+      setState(newCount);
     }
 
     return {
       input: {
         attrs: {
-          value: `The count is ${state.count}`
+          value: `The count is ${state}`
         },
         events: {
           focus: handleClick
@@ -60,7 +62,7 @@ export default function Reactive () {
   } 
 
   function Test(props = { count }) {
-    console.log(props);
+    // console.log(props);
     return {
       div: {
         attrs: {
@@ -70,20 +72,6 @@ export default function Reactive () {
             count: count
           },
         },
-        // events: {
-        //   click: () => {
-        //     console.log("clicked");
-        //   },
-        //   mouseover: [
-        //     () => {
-        //       console.log("mouseover");
-        //     },
-        //     () => {
-        //       console.log("mouseover2");
-        //     }
-          
-        //   ]
-        // },
         children: [
           Input.bind({ count }),
           String(count),
@@ -100,7 +88,7 @@ export default function Reactive () {
   }
 
   let count = 0;
-  Paradox.app(
+  app(
     Test.bind({ count }),
     document.getElementById("root")
   )
