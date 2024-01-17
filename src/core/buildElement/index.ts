@@ -5,10 +5,10 @@ import handleEvents from "./helpers/handleEvents";
 import applyStyles from "./helpers/applyStyles";
 import appendChildren from "./helpers/appendChildren";
 
-type ParadoxElement = {
+type ParadoxElementOptions = {
   id?: string;
   classList?: string;
-  children?: ParadoxElement[];
+  children?: ParadoxElementOptions[];
   attributes?: { [key: string]: string };
   events?: { [key: string]: EventListener };
   text?: string;
@@ -31,7 +31,7 @@ type ParadoxElement = {
  */
 export default function buildElement(
   tag: string,
-  options: ParadoxElement = { id: "", classList: "", children: [], attributes: {}, events: {}, text: "", style: {} }
+  options: ParadoxElementOptions = { id: "", classList: "", children: [], attributes: {}, events: {}, text: "", style: {} }
 ): HTMLElement {
   // Return empty string if tag is not provided
   if (!tag) throw new Error("Tag is required");
