@@ -26,7 +26,8 @@ The following features are planned to be implemented before the first stable rel
 
 - [x] Add typescript watch mode to `npm run dev`
 - [ ] Add state management support
-- [ ] Add `Paradox.app`. This will allow users to create reactive components.
+- [X] Add `Paradox.buildApp`. This will allow users to create reactive components.
+- [ ] Add `Paradox.buildApp` tests
 
 #### buildElement
 

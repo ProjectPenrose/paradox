@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const buildElement_1 = __importDefault(require("./core/buildElement"));
 const Router_1 = __importDefault(require("./core/Router"));
 const Pubsub_1 = __importDefault(require("./core/Pubsub"));
-// import app from "./core/app";
+const buildApp_1 = __importDefault(require("./core/buildApp"));
 /**
  * Represents the Paradox object.
  */
@@ -14,6 +14,6 @@ const Paradox = {
     buildElement: buildElement_1.default,
     Router: Router_1.default,
     pubsub: Pubsub_1.default,
-    // app NOT PULISHED YET
+    buildApp: buildApp_1.default,
 };
 exports.default = Paradox;

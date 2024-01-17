@@ -1,7 +1,7 @@
 import buildElement from "./core/buildElement";
 import Router from "./core/Router";
 import pubsub from "./core/Pubsub";
-// import app from "./core/app";
+import buildApp from "./core/buildApp";
 
 /**
  * Represents the Paradox object.
@@ -10,7 +10,7 @@ const Paradox = {
   buildElement,
   Router,
   pubsub,
-  // app NOT PULISHED YET
+  buildApp,
 };
 
 export default Paradox;
