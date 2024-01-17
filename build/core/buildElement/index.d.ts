@@ -1,7 +1,7 @@
-type ParadoxElement = {
+type ParadoxElementOptions = {
     id?: string;
     classList?: string;
-    children?: ParadoxElement[];
+    children?: ParadoxElementOptions[];
     attributes?: {
         [key: string]: string;
     };
@@ -27,5 +27,5 @@ type ParadoxElement = {
  * @param {Object} [options.style={}] - The key-value pairs of inline styles for the element.
  * @returns {HTMLElement} - The constructed HTML element.
  */
-export default function buildElement(tag: string, options?: ParadoxElement): HTMLElement;
+export default function buildElement(tag: string, options?: ParadoxElementOptions): HTMLElement;
 export {};

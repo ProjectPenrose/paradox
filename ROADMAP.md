@@ -16,7 +16,7 @@ The following features are not directly related to the library itself, but are s
 - [ ] Finish community guidelines
 - [ ] Automate release process
 - [ ] Automate changelog generation
-- [ ] Add badges to README
+- [x] Add badges to README
 
 ### Features
 
@@ -26,7 +26,8 @@ The following features are planned to be implemented before the first stable rel
 
 - [x] Add typescript watch mode to `npm run dev`
 - [ ] Add state management support
-- [ ] Add `Paradox.app`. This will allow users to create reactive components.
+- [X] Add `Paradox.buildApp`. This will allow users to create reactive components.
+- [ ] Add `Paradox.buildApp` tests
 
 #### buildElement
 
@@ -41,3 +42,11 @@ The following features are planned to be implemented before the first stable rel
 - [ ] Add `once` method so that a subscriber can be removed after it has been called once
 - [ ] Add `clear` method to remove all subscribers
 
+#### utils
+
+- [ ] Add `debounce` method
+- [ ] Add `throttle` method
+
+#### Docs
+
+- [ ] Turn examples into docs

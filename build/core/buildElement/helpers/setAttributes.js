@@ -12,6 +12,12 @@ const booleanAttributes = [
     "formnovalidate",
     "autocompleted",
 ];
+/**
+ * Sets the attributes of an HTML element.
+ * If the attribute is a boolean attribute, it will only be set if the value is truthy.
+ * @param element - The HTML element to set the attributes for.
+ * @param attributes - An object containing the attribute key-value pairs.
+ */
 function setAttributes(element, attributes) {
     for (const [key, value] of Object.entries(attributes)) {
         // Attributes like disabled, checked, selected need special handling
