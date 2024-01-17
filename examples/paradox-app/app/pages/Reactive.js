@@ -1,9 +1,9 @@
-import app from "../../../../build/core/app";
-import createElement from "../../../../build/core/createElement";
-import render from "../../../../build/core/render";
-import mount from "../../../../build/core/mount";
-import diff from "../../../../build/core/diff";
-import { addState, onStateChange } from "../../../../build/core/app";
+import app from "../../../../build/core/buildApp";
+// import createElement from "../../../../build/core/createElement";
+// import render from "../../../../build/core/render";
+// import mount from "../../../../build/core/mount";
+// import diff from "../../../../build/core/diff";
+import { addState, onStateChange } from "../../../../build/core/buildApp";
 
 export default function Reactive () {
   // console.log("Reactive page");

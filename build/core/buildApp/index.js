@@ -1,13 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addEffect = exports.onStateChange = exports.addState = void 0;
-const createElement_1 = __importDefault(require("./createElement"));
-const render_1 = __importDefault(require("./render"));
-const mount_1 = __importDefault(require("./mount"));
-const diff_1 = __importDefault(require("./diff"));
+exports.addState = exports.addEffect = exports.onStateChange = void 0;
 const proxySubscribersMap = new WeakMap();
 const SUBSCRIBE_METHOD = Symbol();
 const toBeNotified = new Set();
@@ -53,31 +46,6 @@ function proxy(obj) {
     return result;
 }
 const proxyObj = proxy({});
-function addState(value) {
-    // const obj = Object.assign(proxyObj, value)
-    // // console.log(obj);
-    // const callback = (object) => {
-    //   Object.keys(object).forEach(o => {
-    //     if (obj[o]) obj[o] = object[o]
-    //   })
-    //   Object.assign(obj, object)
-    // }
-    let state = value;
-    const callback = (val) => {
-        state = val;
-        // console.log(state);
-        const newVTree = createVirtualDOM(treeFuncCache);
-        const newVDOM = buildVirtualDOM(newVTree);
-        console.log(vDOM, newVDOM);
-        if ((0, diff_1.default)(vDOM, newVDOM)) {
-            vDOM = newVDOM;
-            console.log("rendering");
-            renderVirtualDOM(vDOM, targetNodeCache);
-        }
-    };
-    return [state, callback];
-}
-exports.addState = addState;
 function onStateChange(proxyObj, callback) {
     if (!proxySubscribersMap.has(proxyObj)) {
         throw new Error("proyxObj is not a proxy");
@@ -93,9 +61,30 @@ function addEffect(fn) {
     notifyNext(fn);
 }
 exports.addEffect = addEffect;
+function createVirtualDOM(treeFunc) {
+    return treeFunc();
+}
+function createElement(tagName, options = { children: [], events: {}, attrs: {} }) {
+    if (!tagName)
+        throw new Error("tagName is required");
+    let children = [];
+    let events = {};
+    let attrs = {};
+    if (typeof options === 'object' && !Array.isArray(options) && 'children' in options) {
+        children = options.children || [];
+        events = options.events || {};
+        attrs = options.attrs || {};
+    }
+    return {
+        tagName,
+        attrs,
+        children,
+        events,
+    };
+}
+;
 function buildVirtualDOM(vTree) {
     let vDOM = [];
-    // create virtual DOM
     if (!Array.isArray(vTree))
         vTree = [vTree];
     for (const elementObj of vTree) {
@@ -111,43 +100,96 @@ function buildVirtualDOM(vTree) {
             if (children.length) {
                 children = buildVirtualDOM(children);
             }
-            vDOM.push((0, createElement_1.default)(key, { attrs, events, children })); // TODO: add events
+            vDOM.push(createElement(key, { attrs, events, children }));
         }
     }
     return vDOM;
 }
+function renderEle(vnode) {
+    let tagName = "";
+    let attrs = {};
+    let children = [];
+    let events = {};
+    if (typeof vnode === "object") {
+        tagName = vnode.tagName;
+        attrs = vnode.attrs;
+        children = vnode.children;
+        events = vnode.events || {};
+    }
+    const element = document.createElement(tagName);
+    for (const [key, value] of Object.entries(attrs)) {
+        element.setAttribute(key, value.toString());
+    }
+    for (const child of children) {
+        const $child = render(child);
+        element.appendChild($child);
+    }
+    for (const [key, value] of Object.entries(events)) {
+        if (Array.isArray(value)) {
+            for (const event of value) {
+                element.addEventListener(key, event);
+            }
+            continue;
+        }
+        else {
+            element.addEventListener(key, value);
+        }
+    }
+    return element;
+}
+;
+function render(vnode) {
+    if (typeof vnode === "string") {
+        return document.createTextNode(vnode);
+    }
+    return renderEle(vnode);
+}
+;
+function mount(vnode, $target) {
+    $target.replaceWith(vnode);
+    return vnode;
+}
 function renderVirtualDOM(vDOM, targetNode) {
-    // targetNode.innerHTML = ''; // Clear the target node.
     vDOM.forEach((vnode) => {
-        const $node = (0, render_1.default)(vnode);
-        targetNodeCache = (0, mount_1.default)($node, targetNode);
+        const $node = render(vnode);
+        targetNodeCache = mount($node, targetNode);
     });
 }
-function createVirtualDOM(treeFunc) {
-    // treeFunc = treeFunc.bind(proxyObj);
-    return treeFunc();
+function addState(value) {
+    let state = value;
+    const callback = (val) => {
+        state = val;
+        const newVTree = createVirtualDOM(treeFuncCache);
+        const newVDOM = buildVirtualDOM(newVTree);
+        console.log(vDOM, newVDOM);
+        if (diff(vDOM, newVDOM)) {
+            vDOM = newVDOM;
+            console.log("rendering");
+            renderVirtualDOM(vDOM, targetNodeCache);
+        }
+    };
+    return [state, callback];
 }
+exports.addState = addState;
 let vTree = {};
 let vDOM = {};
-let treeFuncCache = () => { };
+let treeFuncCache;
 let targetNodeCache = document.body;
 function app(treeFunc, targetNode) {
     treeFuncCache = treeFunc;
     targetNodeCache = targetNode;
     vTree = createVirtualDOM(treeFunc);
-    // console.log(vTree);
     vDOM = buildVirtualDOM(vTree);
-    // console.log(vDOM);
     renderVirtualDOM(vDOM, targetNode);
-    onStateChange(proxyObj, () => {
-        console.log(proxyObj);
-        const newVTree = createVirtualDOM(treeFunc);
-        const newVDOM = buildVirtualDOM(newVTree);
-        console.log(vDOM, newVDOM);
-        // if (diff(vDOM, newVDOM)) {
-        //   vDOM = newVDOM;
-        //   renderVirtualDOM(vDOM, targetNode);
-        // }
-    });
+    // onStateChange(proxyObj, () => {
+    //   console.log(proxyObj);
+    //   const newVTree = createVirtualDOM(treeFunc);
+    //   const newVDOM = buildVirtualDOM(newVTree);
+    //   console.log(vDOM, newVDOM);
+    //   // if (diff(vDOM, newVDOM)) {
+    //   //   vDOM = newVDOM;
+    //   //   renderVirtualDOM(vDOM, targetNode);
+    //   // }
+    // });
 }
 exports.default = app;
