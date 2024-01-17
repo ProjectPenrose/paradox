@@ -1,8 +1,18 @@
+type Route = {
+  path: string;
+  component?: Function;
+  layout?: Function;
+  props?: object;
+  pathSegments?: string[];
+};
+
+type RouteList = Route[];
+
 /**
  * Represents a router that handles routing and navigation in a web application.
  */
 export default class Router {
-  routes: Array<any>;
+  routes: RouteList;
   baseUrl: string;
   queryString: string;
   path: string;
@@ -49,22 +59,24 @@ export default class Router {
     const pathSegments = path.split("/");
 
     const matchedRoute = routes.find(({ pathSegments: routePathSegments }) => {
-      if (routePathSegments.length !== pathSegments.length) {
-        return false;
-      }
-
-      for (let i = 0; i < routePathSegments.length; i++) {
-        const routeSegment = routePathSegments[i];
-        const pathSegment = pathSegments[i];
-
-        if (!routeSegment.startsWith(":") && routeSegment !== pathSegment) {
+      if (routePathSegments) {
+        if (routePathSegments.length !== pathSegments.length) {
           return false;
-        } else if (routeSegment.startsWith(":")) {
-          this.params.set(routeSegment.slice(1), pathSegment);
         }
-      }
 
-      return true;
+        for (let i = 0; i < routePathSegments.length; i++) {
+          const routeSegment = routePathSegments[i];
+          const pathSegment = pathSegments[i];
+
+          if (!routeSegment.startsWith(":") && routeSegment !== pathSegment) {
+            return false;
+          } else if (routeSegment.startsWith(":")) {
+            this.params.set(routeSegment.slice(1), pathSegment);
+          }
+        }
+
+        return true;
+      }
     });
 
     if (matchedRoute) {

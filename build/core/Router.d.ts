@@ -1,8 +1,16 @@
+type Route = {
+    path: string;
+    component?: Function;
+    layout?: Function;
+    props?: object;
+    pathSegments?: string[];
+};
+type RouteList = Route[];
 /**
  * Represents a router that handles routing and navigation in a web application.
  */
 export default class Router {
-    routes: Array<any>;
+    routes: RouteList;
     baseUrl: string;
     queryString: string;
     path: string;
@@ -28,3 +36,4 @@ export default class Router {
      */
     init(): Promise<string>;
 }
+export {};
