@@ -14,6 +14,12 @@
     <a href="https://github.com/ProjectPenrose/paradox/labels/enhancement">Request Features</a>
   </p>
   <p align="center">
+    <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/ProjectPenrose/paradox">
+    <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/w/ProjectPenrose/paradox">
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues-raw/ProjectPenrose/paradox">
+    <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/ProjectPenrose/paradox">
+  </p>
+  <p align="center">
     <b>IMPORTANT: Things are changing a lot right now, so please be patient, this is a work in progress</b>
   </p>
 </p>
@@ -32,7 +38,6 @@
     - [Project structure example](#project-structure-example)
     - [Webpack config](#webpack-config)
   - [Paradox as a module in a simple html project](#paradox-as-a-module-in-a-simple-html-project)
-  - [Paradox on development mode](#paradox-on-development-mode)
 - [Documentation](#documentation)
   - [Build an element with `Paradox.buildElement`](#build-an-element-with-paradoxbuildelement)
   - [Routes with `Paradox.Router`](#routes-with-paradoxrouter)
@@ -54,11 +59,11 @@ Contributions are welcome thogh xd, please [start a discussion](https://github.c
 
 ## Getting Started
 
-Paradox is a simple vanilla javascript library for DOM manipulation that also provides a simple router and pubsub implementation.
+Paradox is a simple vanilla javascript library for DOM manipulation that also provides a simple router and PubSub implementation.
 
 ### Requirements
 
-- [Node.js](https://nodejs.org/en/) >= v18.17.1 (For development mode)
+- [Node.js](https://nodejs.org/en/) >= v16.16.0 (For development mode)
 
 ### Installation
 
@@ -68,10 +73,9 @@ Paradox is a simple vanilla javascript library for DOM manipulation that also pr
     ```
 2. Install NPM packages
     ```sh
+    cd penrose-paradox
     npm install
     ```
-
-
 
 ## Usage
 
@@ -156,37 +160,15 @@ module.exports = {
 }
 ```
 
-### Paradox as a module in a simple html project
+### Paradox as a module in a simple HTML project
 
-If you want to use it as a module in a simple html project, you should import it in your script like this:
+If you want to use it as a module in a simple HTML project, you should import it in your script like this:
 
 ```html
 <script type="module">
-  import Paradox from "path/to/paradox/build/index.js";
+  import Paradox from "./path/to/penrose-paradox/build/index.js";
 </script>
 ```
-
-### Paradox on development mode
-
-If you want to build a project that uses paradox, you can run the build script:
-```sh
-npm run paradox-app
-```
-**This will generate the following:**
-- A `server` folder with a simple express server that serves the `dist` folder and redirects all the requests to the `index.html` file.
-- A `scss` folder with a simple `main.scss` file that imports bootstrap.
-- An `app` folder with a simple html project that uses paradox and a `main.js` file that imports paradox and shows a simple example of how to use it.
-- A `webpack.config.js` file that you can use to build your project.
-
-Then, the script will run the dev script, so you can start developing your project by changing the `app` folder and running the dev script again.
-**This will generate a `dist` folder with the built project.**
-
-**Notes:**
-- The `server` folder is just a simple example, you can delete it and create your own server.
-- The `scss` folder is just a simple example, you can delete it and create your own scss files.
-- The `app` folder is just a simple example, you can delete it and create your own project.
-- The `webpack.config.js` file is just a simple example, you can delete it and create your own webpack config file.
-- The `dist` folder will contain the javascript bundle and a css file with the styles. (The css file is generated from the `scss/main.scss` file)
 
 ## Documentation
 
@@ -209,7 +191,7 @@ Paradox provides a simple way to build an element with the `buildElement` functi
 | children | array | The element children |
 
 ```javascript
-import Paradox from "paradox";
+import Paradox from "penrose-paradox";
 
 function handleButtonClick() {
   alert("Hello World!");
@@ -252,7 +234,7 @@ document.body.appendChild(Paradox.buildElement("button", myButton));
 Paradox provides a simple router to handle the navigation between pages.
 
 ```javascript
-import Paradox from "paradox";
+import Paradox from "penrose-paradox";
 
 function Home(props) {
   const { root } = props;
@@ -319,7 +301,7 @@ In the PubSub pattern, publishers send messages without knowing who the subscrib
 This pattern is widely used in event-driven programming and can help to decouple the components of an application, leading to code that is easier to maintain and extend. In the context of Paradox, it allows components to communicate with each other in a decoupled manner.
 
 ```javascript
-import Paradox from "paradox";
+import Paradox from "penrose-paradox";
 
 Paradox.pubsub.subscribe("myEvent", (data) => {
   console.log(data);
