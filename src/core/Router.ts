@@ -1,12 +1,31 @@
+type RouteParams = Map<string, (string | string[])>;
+
+// TODO: Add array support for query params
+
+type RouterProps = {
+  queryString?: string;
+  params?: RouteParams;
+  baseUrl?: string;
+};
+
 type Route = {
   path: string;
   component?: Function;
   layout?: Function;
-  props?: object;
+  props?: RouterProps;
   pathSegments?: string[];
 };
 
 type RouteList = Route[];
+
+type RouterOptions = {
+  routes?: RouteList;
+  baseUrl?: string;
+};
+
+type RouterMemo = {
+  [key: string]: string;
+};
 
 /**
  * Represents a router that handles routing and navigation in a web application.
@@ -17,15 +36,15 @@ export default class Router {
   queryString: string;
   path: string;
   query: URLSearchParams;
-  params: Map<string, string>;
-  memo: { [key: string]: string };
+  params: RouteParams;
+  memo: RouterMemo;
   /**
    * Creates a new instance of the Router class.
    * @param {Object} options - The options for configuring the router.
    * @param {Array} options.routes - An array of route objects.
    * @param {string} options.baseUrl - The base URL of the application.
    */
-  constructor(options: { routes?: any[], baseUrl?: string } = {}) {
+  constructor(options: RouterOptions = {}) {
     const { routes = [], baseUrl = "" } = options;
 
     this.routes = routes.map(route => ({
