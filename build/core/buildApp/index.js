@@ -85,8 +85,8 @@ function render(vnode) {
     return renderEle(vnode);
 }
 ;
-function mount(vnode, $target) {
-    $target.replaceWith(vnode);
+function mount(vnode, target) {
+    target.replaceWith(vnode);
     return vnode;
 }
 function renderVirtualDOM(vDOM, targetNode) {
@@ -189,7 +189,6 @@ function addState(value) {
         state = val;
         const newVTree = createVirtualDOM(treeFuncCache);
         const newVDOM = buildVirtualDOM(newVTree);
-        console.log(vDOM, newVDOM);
         if (diff(vDOM, newVDOM)) {
             vDOM = newVDOM;
             console.log("rendering");

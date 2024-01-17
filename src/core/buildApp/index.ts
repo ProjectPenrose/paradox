@@ -123,8 +123,8 @@ function render(vnode: ParadoxVirtualElement): HTMLElement | Text {
   return renderEle(vnode as ParadoxVirtualElement);
 };
 
-function mount (vnode: HTMLElement, $target: HTMLElement): HTMLElement {
-  $target.replaceWith(vnode);
+function mount(vnode: HTMLElement, target: HTMLElement): HTMLElement {
+  target.replaceWith(vnode);
   return vnode;
 }
 
@@ -250,7 +250,6 @@ export function addState (value: any): [State, StateCallback] {
     state = val;    
     const newVTree = createVirtualDOM(treeFuncCache);
     const newVDOM = buildVirtualDOM(newVTree);
-    console.log(vDOM, newVDOM);
     
     if (diff(vDOM as ParadoxVirtualElement[], newVDOM as ParadoxVirtualElement[])) {
       vDOM = newVDOM;
