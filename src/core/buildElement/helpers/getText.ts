@@ -1,6 +1,6 @@
 // Object for caching processed text values
-type MemoizedText = { [key: string]: string };
-const memoizedText: MemoizedText = {};
+type ParadoxElementMemoizedText = { [key: string]: string };
+const memoizedText: ParadoxElementMemoizedText = {};
 // Function to retrieve or compute a formatted text value
 
 /**
