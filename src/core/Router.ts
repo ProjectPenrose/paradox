@@ -48,7 +48,7 @@ export default class Router {
    * @returns {Promise<string>} A promise that resolves to the current path.
    * @throws {Error} If the route is not found or an error occurs during navigation.
    */
-  async init() {
+  async init(): Promise<string> {
     let { path } = this;
     const { routes, queryString } = this;
 

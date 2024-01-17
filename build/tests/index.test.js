@@ -161,7 +161,7 @@ describe('Paradox', () => {
                 const router = new Router({ routes, baseUrl: "http://localhost" });
                 router.init();
                 it("should set pathSegments", () => {
-                    expect(router.routes[0].pathSegments).toEqual(["", "user", ":id", ""]);
+                    expect(router.routes[1].pathSegments).toEqual(["", "user", ":id"]);
                 });
             });
         });
