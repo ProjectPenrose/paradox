@@ -5,6 +5,16 @@ import handleEvents from "./helpers/handleEvents";
 import applyStyles from "./helpers/applyStyles";
 import appendChildren from "./helpers/appendChildren";
 
+type ParadoxElement = {
+  id?: string;
+  classList?: string;
+  children?: ParadoxElement[];
+  attributes?: { [key: string]: string };
+  events?: { [key: string]: EventListener };
+  text?: string;
+  style?: { [key: string]: string };
+};
+
 /**
  * Builds and returns an HTML element based on the provided tag and options.
  *
@@ -21,17 +31,8 @@ import appendChildren from "./helpers/appendChildren";
  */
 export default function buildElement(
   tag: string,
-  options: {
-    id?: string;
-    classList?: string;
-    children?: object[];
-    attributes?: { [key: string]: string };
-    events?: { [key: string]: EventListener };
-    text?: string;
-    style?: { [key: string]: string };
-  
-  } = { id: "", classList: "", children: [], attributes: {}, events: {}, text: "", style: {} }
-) {
+  options: ParadoxElement = { id: "", classList: "", children: [], attributes: {}, events: {}, text: "", style: {} }
+): HTMLElement {
   // Return empty string if tag is not provided
   if (!tag) throw new Error("Tag is required");
   // Destructure and provide default values for the options parameter

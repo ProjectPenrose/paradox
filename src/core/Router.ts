@@ -1,21 +1,50 @@
+type RouteParams = Map<string, (string | string[])>;
+
+// TODO: Add array support for query params
+
+type RouterProps = {
+  queryString?: string;
+  params?: RouteParams;
+  baseUrl?: string;
+};
+
+type Route = {
+  path: string;
+  component?: Function;
+  layout?: Function;
+  props?: RouterProps;
+  pathSegments?: string[];
+};
+
+type RouteList = Route[];
+
+type RouterOptions = {
+  routes?: RouteList;
+  baseUrl?: string;
+};
+
+type RouterMemo = {
+  [key: string]: string;
+};
+
 /**
  * Represents a router that handles routing and navigation in a web application.
  */
 export default class Router {
-  routes: Array<any>;
+  routes: RouteList;
   baseUrl: string;
   queryString: string;
   path: string;
   query: URLSearchParams;
-  params: Map<string, string>;
-  memo: { [key: string]: string };
+  params: RouteParams;
+  memo: RouterMemo;
   /**
    * Creates a new instance of the Router class.
    * @param {Object} options - The options for configuring the router.
    * @param {Array} options.routes - An array of route objects.
    * @param {string} options.baseUrl - The base URL of the application.
    */
-  constructor(options: { routes?: any[], baseUrl?: string } = {}) {
+  constructor(options: RouterOptions = {}) {
     const { routes = [], baseUrl = "" } = options;
 
     this.routes = routes.map(route => ({
@@ -38,7 +67,7 @@ export default class Router {
    * @returns {Promise<string>} A promise that resolves to the current path.
    * @throws {Error} If the route is not found or an error occurs during navigation.
    */
-  async init() {
+  async init(): Promise<string> {
     let { path } = this;
     const { routes, queryString } = this;
 
@@ -49,22 +78,24 @@ export default class Router {
     const pathSegments = path.split("/");
 
     const matchedRoute = routes.find(({ pathSegments: routePathSegments }) => {
-      if (routePathSegments.length !== pathSegments.length) {
-        return false;
-      }
-
-      for (let i = 0; i < routePathSegments.length; i++) {
-        const routeSegment = routePathSegments[i];
-        const pathSegment = pathSegments[i];
-
-        if (!routeSegment.startsWith(":") && routeSegment !== pathSegment) {
+      if (routePathSegments) {
+        if (routePathSegments.length !== pathSegments.length) {
           return false;
-        } else if (routeSegment.startsWith(":")) {
-          this.params.set(routeSegment.slice(1), pathSegment);
         }
-      }
 
-      return true;
+        for (let i = 0; i < routePathSegments.length; i++) {
+          const routeSegment = routePathSegments[i];
+          const pathSegment = pathSegments[i];
+
+          if (!routeSegment.startsWith(":") && routeSegment !== pathSegment) {
+            return false;
+          } else if (routeSegment.startsWith(":")) {
+            this.params.set(routeSegment.slice(1), pathSegment);
+          }
+        }
+
+        return true;
+      }
     });
 
     if (matchedRoute) {

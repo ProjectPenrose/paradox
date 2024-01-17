@@ -101,9 +101,6 @@ describe('Paradox', () => {
         function Home() {
             document.body.innerHTML = `<div>Home <a href="/about?hello=world">About</a></div>`;
         }
-        function About() {
-            document.body.innerHTML = `<div>About <a href="/">Home</a></div>`;
-        }
         const routes = [
             { path: "/", component: Home },
         ];
@@ -154,6 +151,17 @@ describe('Paradox', () => {
                 });
                 it("should set the props", () => {
                     expect(router.routes[0].props).toBeDefined();
+                });
+            });
+            describe("/user/:id route", () => {
+                const routes = [
+                    { path: "/", component: Home },
+                    { path: "/user/:id", component: Home },
+                ];
+                const router = new Router({ routes, baseUrl: "http://localhost" });
+                router.init();
+                it("should set pathSegments", () => {
+                    expect(router.routes[1].pathSegments).toEqual(["", "user", ":id"]);
                 });
             });
         });

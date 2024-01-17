@@ -2,7 +2,7 @@
 const memoizedStyleKeys: { [key: string]: string } = {};
 
 // Function to convert camelCase into kebab-case for CSS properties
-function getStyleKey(key: string = "") {
+function getStyleKey(key: string = ""): string {
   // Check if the key is already processed and return the cached value if so
   if (memoizedStyleKeys[key] !== undefined) {
     return memoizedStyleKeys[key];
@@ -17,7 +17,7 @@ function getStyleKey(key: string = "") {
   return styleKey;
 }
 
-function applyStyles(element: HTMLElement, style: { [key: string]: string }) {
+function applyStyles(element: HTMLElement, style: { [key: string]: string }): void {
   const styleDeclaration: CSSStyleDeclaration = element.style;
   // Apply inline style to the element by converting keys from camelCase
   for (const [key, value] of Object.entries(style)) {

@@ -45,20 +45,22 @@ class Router {
                 return this.memo[path];
             const pathSegments = path.split("/");
             const matchedRoute = routes.find(({ pathSegments: routePathSegments }) => {
-                if (routePathSegments.length !== pathSegments.length) {
-                    return false;
-                }
-                for (let i = 0; i < routePathSegments.length; i++) {
-                    const routeSegment = routePathSegments[i];
-                    const pathSegment = pathSegments[i];
-                    if (!routeSegment.startsWith(":") && routeSegment !== pathSegment) {
+                if (routePathSegments) {
+                    if (routePathSegments.length !== pathSegments.length) {
                         return false;
                     }
-                    else if (routeSegment.startsWith(":")) {
-                        this.params.set(routeSegment.slice(1), pathSegment);
+                    for (let i = 0; i < routePathSegments.length; i++) {
+                        const routeSegment = routePathSegments[i];
+                        const pathSegment = pathSegments[i];
+                        if (!routeSegment.startsWith(":") && routeSegment !== pathSegment) {
+                            return false;
+                        }
+                        else if (routeSegment.startsWith(":")) {
+                            this.params.set(routeSegment.slice(1), pathSegment);
+                        }
                     }
+                    return true;
                 }
-                return true;
             });
             if (matchedRoute) {
                 try {

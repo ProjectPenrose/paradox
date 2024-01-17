@@ -1,5 +1,5 @@
 // List of boolean attributes that need special handling
-const booleanAttributes = [
+const booleanAttributes: string[] = [
   "disabled",
   "checked",
   "selected",
@@ -11,7 +11,7 @@ const booleanAttributes = [
   "autocompleted",
 ];
 
-function setAttributes(element: HTMLElement, attributes: { [key: string]: string }) {
+function setAttributes(element: HTMLElement, attributes: { [key: string]: string }): void {
   for (const [key, value] of Object.entries(attributes)) {
     // Attributes like disabled, checked, selected need special handling
     if (booleanAttributes.includes(key)) {

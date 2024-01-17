@@ -1,6 +1,6 @@
-function appendChildren(element: HTMLElement, children: Array<any>, buildElement: Function) {
+function appendChildren(element: HTMLElement, children: Array<any>, buildElement: Function): void {
   // Create a Document Fragment to efficiently append children
-  const fragment = document.createDocumentFragment();
+  const fragment = document.createDocumentFragment() as DocumentFragment;
 
   // Append each child to the fragment
   if (children) {

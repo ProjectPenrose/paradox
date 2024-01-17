@@ -16,7 +16,7 @@
   },
   "main": "build/index.js",
   "module": "build/index.js",
-  "types": "types/index.d.ts",
+  "types": "build/index.d.ts",
   "ts-module": "src/index.ts",
   "license": "ISC",
   "repository": {
