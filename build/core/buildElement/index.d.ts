@@ -1,3 +1,18 @@
+type ParadoxElement = {
+    id?: string;
+    classList?: string;
+    children?: ParadoxElement[];
+    attributes?: {
+        [key: string]: string;
+    };
+    events?: {
+        [key: string]: EventListener;
+    };
+    text?: string;
+    style?: {
+        [key: string]: string;
+    };
+};
 /**
  * Builds and returns an HTML element based on the provided tag and options.
  *
@@ -12,18 +27,5 @@
  * @param {Object} [options.style={}] - The key-value pairs of inline styles for the element.
  * @returns {HTMLElement} - The constructed HTML element.
  */
-export default function buildElement(tag: string, options?: {
-    id?: string;
-    classList?: string;
-    children?: object[];
-    attributes?: {
-        [key: string]: string;
-    };
-    events?: {
-        [key: string]: EventListener;
-    };
-    text?: string;
-    style?: {
-        [key: string]: string;
-    };
-}): HTMLElement;
+export default function buildElement(tag: string, options?: ParadoxElement): HTMLElement;
+export {};

@@ -1,7 +1,7 @@
 // Object for caching processed text values
 const memoizedText:{ [key: string]: string } = {};
 // Function to retrieve or compute a formatted text value
-function getText(text = "") {
+function getText(text = ""): string {
   // Check if the text has been processed and cached; return it if so
   if (memoizedText[text] !== undefined) {
     return memoizedText[text];
