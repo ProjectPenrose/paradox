@@ -1,7 +1,14 @@
+type ParadoxStyleKeys = { [key: string]: string };
 // Object for caching converted style keys
-const memoizedStyleKeys: { [key: string]: string } = {};
+const memoizedStyleKeys: ParadoxStyleKeys = {};
 
 // Function to convert camelCase into kebab-case for CSS properties
+/**
+ * Converts a camelCase style key to kebab-case and returns the converted key.
+ * If the key has already been processed, the cached value is returned.
+ * @param key - The style key to convert.
+ * @returns The converted style key.
+ */
 function getStyleKey(key: string = ""): string {
   // Check if the key is already processed and return the cached value if so
   if (memoizedStyleKeys[key] !== undefined) {
@@ -17,7 +24,13 @@ function getStyleKey(key: string = ""): string {
   return styleKey;
 }
 
-function applyStyles(element: HTMLElement, style: { [key: string]: string }): void {
+/**
+ * Applies the given styles to the specified HTML element.
+ * 
+ * @param element - The HTML element to apply the styles to.
+ * @param style - The styles to apply, represented as an object with keys and values.
+ */
+function applyStyles(element: HTMLElement, style: ParadoxStyleKeys): void {
   const styleDeclaration: CSSStyleDeclaration = element.style;
   // Apply inline style to the element by converting keys from camelCase
   for (const [key, value] of Object.entries(style)) {
