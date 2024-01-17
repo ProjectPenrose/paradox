@@ -1,66 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addState = exports.addEffect = exports.onStateChange = void 0;
-const proxySubscribersMap = new WeakMap();
-const SUBSCRIBE_METHOD = Symbol();
-const toBeNotified = new Set();
-function notifyNext(fn) {
-    toBeNotified.add(fn);
-    Promise.resolve().then(flush);
-}
-function flush() {
-    for (const fn of toBeNotified) {
-        fn();
-    }
-    toBeNotified.clear();
-}
-function proxy(obj) {
-    const subscribers = new Set();
-    let initialised = false;
-    const result = new Proxy({}, {
-        get(target, property) {
-            if (property === SUBSCRIBE_METHOD) {
-                return subscribers;
-            }
-            return target[property];
-        },
-        set(target, property, value) {
-            if (initialised && obj[property] === value)
-                return true;
-            obj[property] = value;
-            if (value && typeof value === "object" && !Array.isArray(value)) {
-                value = proxy(value);
-            }
-            target[property] = value;
-            subscribers.forEach((subscriber) => {
-                notifyNext(subscriber);
-            });
-            return true;
-        }
-    });
-    for (const key in obj) {
-        result[key] = obj[key];
-    }
-    initialised = true;
-    proxySubscribersMap.set(result, subscribers);
-    return result;
-}
-const proxyObj = proxy({});
-function onStateChange(proxyObj, callback) {
-    if (!proxySubscribersMap.has(proxyObj)) {
-        throw new Error("proyxObj is not a proxy");
-    }
-    proxySubscribersMap.get(proxyObj).add(callback);
-    proxyObj[SUBSCRIBE_METHOD].add(callback);
-    return () => {
-        proxySubscribersMap.get(proxyObj).delete(callback);
-    };
-}
-exports.onStateChange = onStateChange;
-function addEffect(fn) {
-    notifyNext(fn);
-}
-exports.addEffect = addEffect;
+exports.addState = void 0;
 function createVirtualDOM(treeFunc) {
     return treeFunc();
 }
@@ -155,6 +95,94 @@ function renderVirtualDOM(vDOM, targetNode) {
         targetNodeCache = mount($node, targetNode);
     });
 }
+function diffAttrs(oldAttrs, newAttrs) {
+    const patches = [];
+    for (const [key, value] of Object.entries(newAttrs)) {
+        patches.push(node => {
+            node.setAttribute(key, value);
+            return node;
+        });
+    }
+    for (const key of Object.keys(oldAttrs)) {
+        if (!(key in newAttrs)) {
+            patches.push(node => {
+                node.removeAttribute(key);
+                return node;
+            });
+        }
+    }
+    return (node) => {
+        for (const patch of patches) {
+            patch(node);
+        }
+    };
+}
+function zip(xs, ys) {
+    const zipped = [];
+    for (let i = 0; i < Math.min(xs.length, ys.length); i++) {
+        zipped.push([xs[i], ys[i]]);
+    }
+    return zipped;
+}
+function diffChildren(oldChildren, newChildren) {
+    const patches = [];
+    for (const [oldChild, newChild] of zip(oldChildren, newChildren)) {
+        patches.push(diff(oldChild, newChild));
+    }
+    const additionalPatches = [];
+    for (const additionalChild of newChildren.slice(oldChildren.length)) {
+        additionalPatches.push(node => {
+            node.appendChild(render(additionalChild));
+            return node;
+        });
+    }
+    return (parent) => {
+        for (const [patch, child] of zip(patches, parent.childNodes)) {
+            patch(child);
+        }
+        for (const patch of additionalPatches) {
+            patch(parent);
+        }
+        return parent;
+    };
+}
+function diff(originalOldTree, originalNewTree) {
+    const oldTree = originalOldTree[0];
+    const newTree = originalNewTree[0];
+    if (!newTree) {
+        return (node) => {
+            node.remove();
+            return undefined;
+        };
+    }
+    if (typeof oldTree === "string" || typeof newTree === "string") {
+        if (oldTree !== newTree) {
+            return (node) => {
+                const newNode = render(newTree);
+                node.replaceWith(newNode);
+                return newNode;
+            };
+        }
+        else {
+            return (node) => undefined;
+        }
+    }
+    if (oldTree.tagName !== newTree.tagName) {
+        return (node) => {
+            const newNode = render(newTree);
+            node.replaceWith(newNode);
+            return newTree;
+        };
+    }
+    const patchAttr = diffAttrs(oldTree.attrs, newTree.attrs);
+    const patchChildren = diffChildren(oldTree.children, newTree.children);
+    return (node) => {
+        patchAttr(node);
+        patchChildren(node);
+        return node;
+    };
+}
+;
 function addState(value) {
     let state = value;
     const callback = (val) => {

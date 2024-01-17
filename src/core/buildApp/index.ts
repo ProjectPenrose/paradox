@@ -19,80 +19,6 @@ type ParadoxElement = {
   children: ParadoxElementChildren;
 } | ParadoxAppFunction | string | ParadoxElement[]
 
-const proxySubscribersMap = new WeakMap();
-const SUBSCRIBE_METHOD = Symbol();
-const toBeNotified = new Set();
-
-function notifyNext(fn) {
-  toBeNotified.add(fn);
-  Promise.resolve().then(flush);
-}
-
-function flush() {
-  for (const fn of toBeNotified) {
-    fn();
-  }
-  toBeNotified.clear();
-}
-
-function proxy(obj) {
-  const subscribers = new Set();
-  let initialised = false;
-
-  const result = new Proxy(
-    {},
-    {
-      get(target, property) {
-        if (property === SUBSCRIBE_METHOD) {
-          return subscribers;
-        }
-        return target[property];
-      },
-      set(target, property, value) {
-        if (initialised && obj[property] === value) return true;
-
-        obj[property] = value;
-        if (value && typeof value === "object" && !Array.isArray(value)) {
-          value = proxy(value);
-        }
-        target[property] = value;
-
-        subscribers.forEach((subscriber) => {
-          notifyNext(subscriber);
-        });
-
-        return true;
-      }
-    }
-  );
-
-  for (const key in obj) {
-    result[key] = obj[key];
-  }
-
-  initialised = true;
-
-  proxySubscribersMap.set(result, subscribers);
-
-  return result;
-}
-const proxyObj = proxy({});
-
-export function onStateChange(proxyObj, callback) {
-  if (!proxySubscribersMap.has(proxyObj)) {
-    throw new Error("proyxObj is not a proxy");
-  }
-  proxySubscribersMap.get(proxyObj).add(callback);
-  proxyObj[SUBSCRIBE_METHOD].add(callback);
-  return () => {
-    proxySubscribersMap.get(proxyObj).delete(callback);
-  };
-}
-
-export function addEffect (fn: Function) {
-  notifyNext(fn);
-}
-
 function createVirtualDOM(treeFunc: Function): ParadoxElement | ParadoxElement[] {
   return treeFunc() as ParadoxElement | ParadoxElement[];
 }
@@ -209,6 +135,112 @@ function renderVirtualDOM(vDOM: ParadoxVirtualElement[], targetNode: HTMLElement
   });
 }
 
+type Patch = (node: HTMLElement) => HTMLElement | Text | undefined | ParadoxVirtualElement;
+
+function diffAttrs (oldAttrs: HTMLAttributes, newAttrs: HTMLAttributes): (node: HTMLElement) => void {
+  
+  const patches: Patch[] = [];
+
+  for (const [key, value] of Object.entries(newAttrs)) {
+    patches.push(node => {
+      node.setAttribute(key, value as string);
+      return node;
+    });
+  }
+
+  for (const key of Object.keys(oldAttrs)) {
+    if (!(key in newAttrs)) {
+      patches.push(node => {
+        node.removeAttribute(key);
+        return node;
+      });
+    }
+  }
+
+  return (node: HTMLElement) => {
+    for (const patch of patches) {
+      patch(node);
+    }
+  }
+}
+
+function zip(xs: Array<any>, ys: Array<any>): Array<any> {
+  const zipped = [];
+
+  for (let i = 0; i < Math.min(xs.length, ys.length); i++) {
+    zipped.push([xs[i], ys[i]]);
+  }
+
+  return zipped;
+}
+
+function diffChildren (oldChildren: ParadoxElementChildren, newChildren: ParadoxElementChildren): (node: HTMLElement) => HTMLElement {
+  const patches: Patch[] = [];
+
+  for (const [oldChild, newChild] of zip(oldChildren, newChildren)) {
+    patches.push(diff(oldChild, newChild));
+  }
+
+  const additionalPatches: Patch[] = [];
+
+  for (const additionalChild of newChildren.slice(oldChildren.length)) {
+    additionalPatches.push(node => {
+      node.appendChild(render(additionalChild as ParadoxVirtualElement));
+      return node;
+    });
+  }
+  
+  return (parent: HTMLElement) =>  {
+    for (const [patch, child] of zip(patches, parent.childNodes as any)) {
+      patch(child);
+    }
+
+    for (const patch of additionalPatches) {
+      patch(parent);
+    }
+    return parent;
+  }
+}
+
+function diff(originalOldTree: ParadoxVirtualElement[], originalNewTree: ParadoxVirtualElement[]): Patch {
+  const oldTree = originalOldTree[0]
+  const newTree = originalNewTree[0]
+  if (!newTree) {
+    return (node: HTMLElement): undefined => {
+      node.remove();
+      return undefined;
+    }
+  }
+
+  if (typeof oldTree === "string" || typeof newTree === "string") {
+    if (oldTree !== newTree) {
+      return (node: HTMLElement) => {
+        const newNode = render(newTree);
+        node.replaceWith(newNode);
+        return newNode;
+      }
+    } else {
+      return (node: HTMLElement) => undefined;
+    }
+  }
+  if (oldTree.tagName !== newTree.tagName) {
+    return (node: HTMLElement) => {
+      const newNode = render(newTree);
+      node.replaceWith(newNode);
+      return newTree;
+    }
+  }
+
+  const patchAttr = diffAttrs(oldTree.attrs, newTree.attrs);
+  const patchChildren = diffChildren(oldTree.children, newTree.children);
+
+  return (node: HTMLElement) => {
+    patchAttr(node);
+    patchChildren(node);
+    return node;
+  }
+};
+
 type State = any;
 type StateCallback = (val: any) => void;
 
@@ -220,7 +252,7 @@ export function addState (value: any): [State, StateCallback] {
     const newVDOM = buildVirtualDOM(newVTree);
     console.log(vDOM, newVDOM);
     
-    if (diff(vDOM, newVDOM)) {
+    if (diff(vDOM as ParadoxVirtualElement[], newVDOM as ParadoxVirtualElement[])) {
       vDOM = newVDOM;
       console.log("rendering");
       renderVirtualDOM(vDOM as ParadoxVirtualElement[], targetNodeCache);

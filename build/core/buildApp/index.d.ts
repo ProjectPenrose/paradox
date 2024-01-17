@@ -14,8 +14,6 @@ type ParadoxElement = {
     events?: ParadoxEvents;
     children: ParadoxElementChildren;
 } | ParadoxAppFunction | string | ParadoxElement[];
-export declare function onStateChange(proxyObj: any, callback: any): () => void;
-export declare function addEffect(fn: Function): void;
 type State = any;
 type StateCallback = (val: any) => void;
 export declare function addState(value: any): [State, StateCallback];
