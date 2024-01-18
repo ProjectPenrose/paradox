@@ -1,6 +1,7 @@
 import Paradox from "../index";
 
 const { buildElement, Router, pubsub } = Paradox;
+import { ParadoxElementOptions, ParadoxElementChildren } from "../core/buildElement/types";
 
 describe('Paradox', () => {
   it("should be an object", () => {
@@ -32,7 +33,7 @@ describe('Paradox', () => {
         events: {}
       };
 
-      let element = buildElement("div", options);
+      let element = buildElement("div", options as ParadoxElementOptions);
 
       it("should set the ID if provided", () => {
         expect(element.id).toBe(options.id);
@@ -76,7 +77,7 @@ describe('Paradox', () => {
         ];
         options.children = children;
 
-        element = buildElement("div", options);
+        element = buildElement("div", options as ParadoxElementOptions);
 
         it("should append children if provided", () => {
           expect(element.children.length).toBe(children.length);
@@ -97,7 +98,7 @@ describe('Paradox', () => {
         };
         options.events = events;
 
-        element = buildElement("div", options);
+        element = buildElement("div", options as ParadoxElementOptions);
 
         it("should add event listeners if provided", () => {
           expect(element.onclick).toBeDefined();
