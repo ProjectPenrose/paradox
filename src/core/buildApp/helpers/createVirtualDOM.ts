@@ -1,5 +1,5 @@
-import { ParadoxElement } from "../types";
+import { ParadoxElementResult, ParadoxElement } from "../types";
 
-export default function createVirtualDOM(treeFunc: Function): ParadoxElement | ParadoxElement[] {
-  return treeFunc() as ParadoxElement | ParadoxElement[];
+export default function createVirtualDOM(treeFunc: Function): ParadoxElementResult | ParadoxElementResult[] | ParadoxElement[] {
+  return treeFunc() as ParadoxElementResult | ParadoxElementResult[];
 }

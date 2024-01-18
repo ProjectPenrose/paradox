@@ -1,8 +1,8 @@
 import createElement from "./createElement";
 
-import { ParadoxElement, ParadoxVirtualElement } from "../types";
+import { ParadoxElementResult, ParadoxElement, ParadoxVirtualElement } from "../types";
 
-export default function buildVirtualDOM(vTree: ParadoxElement | ParadoxElement[]): ParadoxVirtualElement[] {
+export default function buildVirtualDOM(vTree: ParadoxElementResult | ParadoxElementResult[] | ParadoxElement[]): ParadoxVirtualElement[] {
   let vDOM: ParadoxVirtualElement[] = [];
 
   if (!Array.isArray(vTree)) vTree = [vTree];

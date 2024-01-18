@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.6] - 2024-01-18
+### Fixed
+  - types issues in `Paradox.buildApp` function
+
 ## [0.4.5] - 2024-01-18
 ### Fixed
   - [#24 options property should also be included in ParadoxElementOptions](https://github.com/ProjectPenrose/paradox/issues/24) by adding new type `ParadoxElementChildren`
