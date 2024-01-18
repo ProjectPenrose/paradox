@@ -1,4 +1,5 @@
 export type ParadoxElementOptions = {
+    tag?: string;
     id?: string;
     classList?: string;
     children?: ParadoxElementOptions[];

@@ -3,6 +3,7 @@ export type RouterProps = {
     queryString?: string;
     params?: RouteParams;
     baseUrl?: string;
+    [key: string]: any;
 };
 export type Route = {
     path: string;
