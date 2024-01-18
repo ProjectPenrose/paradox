@@ -3,10 +3,7 @@ import buildVirtualDOM from "./helpers/buildVirtualDOM";
 import renderVirtualDOM, { targetNodeCache, setTargetNodeCache } from "./helpers/renderVirtualDOM";
 import diff from "./helpers/diff";
 
-import { ParadoxElement, ParadoxAppFunction, ParadoxVirtualElement } from "./types";
-
-type State = any;
-type StateCallback = (val: any) => void;
+import { ParadoxElement, ParadoxAppFunction, ParadoxVirtualElement, State, StateCallback } from "./types";
 
 export function addState (value: any): [State, StateCallback] {
   let state = value;

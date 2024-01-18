@@ -1,5 +1,5 @@
-type EventCallback = (data: any) => void;
-type EventMap = { [key: string]: Set<EventCallback> };
+export type EventCallback = (data: any) => void;
+export type EventMap = { [key: string]: Set<EventCallback> };
 /**
  * PubSub class for implementing publish-subscribe pattern.
  */

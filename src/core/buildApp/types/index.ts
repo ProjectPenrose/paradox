@@ -28,3 +28,6 @@ export type ParadoxVirtualElement = {
 } | string;
 
 export type Patch = (node: HTMLElement) => HTMLElement | Text | undefined | ParadoxVirtualElement;
+
+export type State = any;
+export type StateCallback = (val: any) => void;

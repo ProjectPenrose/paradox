@@ -2,13 +2,13 @@ type RouteParams = Map<string, (string | string[])>;
 
 // TODO: Add array support for query params
 
-type RouterProps = {
+export type RouterProps = {
   queryString?: string;
   params?: RouteParams;
   baseUrl?: string;
 };
 
-type Route = {
+export type Route = {
   path: string;
   component?: Function;
   layout?: Function;
@@ -16,14 +16,14 @@ type Route = {
   pathSegments?: string[];
 };
 
-type RouteList = Route[];
+export type RouteList = Route[];
 
-type RouterOptions = {
+export type RouterOptions = {
   routes?: RouteList;
   baseUrl?: string;
 };
 
-type RouterMemo = {
+export type RouterMemo = {
   [key: string]: string;
 };
 

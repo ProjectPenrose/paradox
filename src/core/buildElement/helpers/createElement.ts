@@ -1,4 +1,5 @@
-type ParadoxElementCache = { [key: string]: HTMLElement };
+import { ParadoxElementCache } from "../types";
+
 const elementsCache: ParadoxElementCache = {};
 
 /**
