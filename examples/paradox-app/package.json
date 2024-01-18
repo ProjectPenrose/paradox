@@ -2,12 +2,11 @@
   "name": "paradox-app",
   "version": "1.0.0",
   "description": "",
-  "main": "build/index.js",
+  "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run client\" \"npm run server\"",
-    "tsc": "npx tsc -w",
-    "server": "nodemon build/index.js",
+    "server": "nodemon server/index.js",
     "client": "concurrently \"npm run sass\" \"npm run webpack\"",
     "sass": "sass --watch scss/main.scss dist/css/style.css",
     "webpack": "webpack --watch"
@@ -38,6 +37,6 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "penrose-paradox": "^0.4.0"
+    "penrose-paradox": "^0.4.7"
   }
 }

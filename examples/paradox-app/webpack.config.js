@@ -6,7 +6,7 @@ const TersePlugin = require("terser-webpack-plugin");
 const env = process.env.env || "development"
 
 module.exports = {
-  entry: './build/app/index.js',
+  entry: './app/index.js',
   target: "web",
   mode: env,
   module: {
@@ -25,7 +25,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'build/dist/js')
+    path: path.resolve(__dirname, 'dist/js')
   },
   devtool: 'eval-source-map',
   optimization: {
