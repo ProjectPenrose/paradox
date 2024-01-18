@@ -2,15 +2,15 @@
   "name": "paradox-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run client\" \"npm run server\"",
-    "server": "nodemon server/index.js",
+    "tsc": "npx tsc -w",
+    "server": "nodemon build/index.js",
     "client": "concurrently \"npm run sass\" \"npm run webpack\"",
     "sass": "sass --watch scss/main.scss dist/css/style.css",
     "webpack": "webpack --watch"
-    
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "@babel/cli": "^7.23.4",
     "@babel/core": "^7.23.7",
     "@babel/preset-env": "^7.23.8",
+    "@types/express": "^4.17.21",
     "bootstrap": "^5.3.2",
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
@@ -31,7 +32,12 @@
     "sass": "^1.69.7",
     "style-loader": "^3.3.4",
     "terser-webpack-plugin": "^5.3.10",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "penrose-paradox": "^0.4.0"
   }
 }
