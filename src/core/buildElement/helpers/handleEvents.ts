@@ -1,4 +1,5 @@
-type ParadoxEventListenerWeakMap = WeakMap<HTMLElement, Map<string, EventListener>>;
+import { ParadoxEventListenerWeakMap } from '../types';
+
 // WeakMap to store event listeners for each element
 const eventListeners: ParadoxEventListenerWeakMap = new WeakMap();
 

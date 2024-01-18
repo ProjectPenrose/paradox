@@ -5,15 +5,7 @@ import handleEvents from "./helpers/handleEvents";
 import applyStyles from "./helpers/applyStyles";
 import appendChildren from "./helpers/appendChildren";
 
-type ParadoxElementOptions = {
-  id?: string;
-  classList?: string;
-  children?: ParadoxElementOptions[];
-  attributes?: { [key: string]: string };
-  events?: { [key: string]: EventListener };
-  text?: string;
-  style?: { [key: string]: string };
-};
+import { ParadoxElementOptions } from "./types";
 
 /**
  * Builds and returns an HTML element based on the provided tag and options.

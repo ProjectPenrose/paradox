@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.2] - 2024-01-18
+### Changed
+  - Structure and module index to export types
+
 ## [0.4.1] - 2024-01-17
 ### Changed
   - Exports in `package.json` to include `build/buildApp/index.js` as entry point
