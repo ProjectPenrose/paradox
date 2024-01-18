@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.4] - 2024-01-18
+### Fixed
+  - [#22 RouterProps should allow key: string: any](https://github.com/ProjectPenrose/paradox/issues/22)
+  - [#23 Add tag as property in ParadoxElementOptions](https://github.com/ProjectPenrose/paradox/issues/22)
+
 ## [0.4.2] - 2024-01-18
 ### Changed
   - Structure and module index to export types
