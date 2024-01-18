@@ -8,7 +8,7 @@ export type ParadoxEvents = {
     [key: string]: EventListener | EventListener[];
 };
 export type ParadoxElementChildren = (ParadoxElement | string)[];
-export type ParadoxAppFunction = () => ParadoxElement | ParadoxElement[];
+export type ParadoxAppFunction = () => ParadoxElementResult | ParadoxElement | ParadoxElement[];
 export type ParadoxElement = {
     attrs: HTMLAttributes;
     events?: ParadoxEvents;
