@@ -1,4 +1,4 @@
-import Paradox from "../../../../build";
+import Paradox from "penrose-paradox";
 
 // Import components
 import Divider from "../components/Divider";

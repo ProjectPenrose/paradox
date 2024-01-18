@@ -1,9 +1,9 @@
-import app from "../../../../build/core/buildApp";
+import app from "penrose-paradox";
 // import createElement from "../../../../build/core/createElement";
 // import render from "../../../../build/core/render";
 // import mount from "../../../../build/core/mount";
 // import diff from "../../../../build/core/diff";
-import { addState, onStateChange } from "../../../../build/core/buildApp";
+import { addState, onStateChange } from "penrose-paradox";
 
 export default function Reactive () {
   // console.log("Reactive page");

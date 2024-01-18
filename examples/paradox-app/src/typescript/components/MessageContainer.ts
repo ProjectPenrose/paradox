@@ -1,4 +1,4 @@
-import Paradox from "../../../../build";
+import Paradox from "penrose-paradox";
 
 // Define the MessageContainer component.
 // This component will be used to show the message when the button is clicked by subscribing to the "button-clicked" event.

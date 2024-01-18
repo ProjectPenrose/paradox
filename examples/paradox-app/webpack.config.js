@@ -1,12 +1,12 @@
 const path = require("path")
 const webpack = require("webpack")
 
-const TersePlugin = require("terser-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const env = process.env.env || "development"
 
 module.exports = {
-  entry: './app/index.js',
+  entry: './build/src/index.js',
   target: "web",
   mode: env,
   module: {
@@ -25,28 +25,17 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist/js')
+    path: path.resolve(__dirname, 'build/dist/js')
   },
   devtool: 'eval-source-map',
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TersePlugin({
-        include: /\.min\.js$/,
-      }),
-    ],
-    splitChunks: {
-      chunks: "all",
-      name: "common",
-    },
-  },
   plugins: [
     new webpack.DefinePlugin({
       "process.env": JSON.stringify(process.env),
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: "./index.html", to: "../index.html" },
+      ],
+    }),
   ],
-  stats: {
-    children: true,
-    errorDetails: true,
-  },
 };

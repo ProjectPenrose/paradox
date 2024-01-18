@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run client\" \"npm run server\"",
-    "server": "nodemon server/index.js",
+    "server": "nodemon build/server/index.js",
     "client": "concurrently \"npm run sass\" \"npm run webpack\"",
-    "sass": "sass --watch scss/main.scss dist/css/style.css",
+    "sass": "sass --watch src/scss/main.scss build/dist/css/style.css",
     "webpack": "webpack --watch"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "@types/express": "^4.17.21",
     "bootstrap": "^5.3.2",
     "concurrently": "^8.2.2",
+    "copy-webpack-plugin": "^12.0.2",
     "cors": "^2.8.5",
     "css-loader": "^6.9.0",
     "dotenv": "^16.3.1",
