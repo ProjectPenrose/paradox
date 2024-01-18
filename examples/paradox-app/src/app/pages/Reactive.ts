@@ -1,7 +1,7 @@
 import Paradox from "penrose-paradox";
 import { addState } from "penrose-paradox/build/core/buildApp"
 import { RouterProps } from "penrose-paradox/build/core/Router";
-import { ParadoxElement } from "penrose-paradox/build/core/buildApp/types";
+import { ParadoxElementResult,ParadoxElementChildren } from "penrose-paradox/build/core/buildApp/types";
 
 export default function Reactive () {
 
@@ -28,16 +28,16 @@ export default function Reactive () {
     }
   } 
 
-  function Test(props = { count }): ParadoxElement {
+  function Test(props = { count }): ParadoxElementResult {
     // console.log(props);
     return {
       div: {
         attrs: {
           id: "app",
           classList: "test test2",
-          data: {
-            count: count
-          },
+          // data: {
+          //   count: count
+          // },
         },
         children: [
           Input.bind({ count }),
@@ -49,7 +49,7 @@ export default function Reactive () {
               }
             }
           },
-        ]
+        ] as ParadoxElementChildren
       }
     }
   }

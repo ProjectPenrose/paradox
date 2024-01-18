@@ -33,9 +33,9 @@ function Reactive() {
                 attrs: {
                     id: "app",
                     classList: "test test2",
-                    data: {
-                        count: count
-                    },
+                    // data: {
+                    //   count: count
+                    // },
                 },
                 children: [
                     Input.bind({ count }),
