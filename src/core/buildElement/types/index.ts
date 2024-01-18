@@ -1,8 +1,9 @@
+export type ParadoxElementChildren = { tag: string; options: ParadoxElementOptions }[];
+
 export type ParadoxElementOptions = {
-  tag?: string;
   id?: string;
   classList?: string;
-  children?: ParadoxElementOptions[];
+  children?: ParadoxElementChildren;
   attributes?: { [key: string]: string };
   events?: { [key: string]: EventListener };
   text?: string;
