@@ -1,5 +1,5 @@
-type EventCallback = (data: any) => void;
-type EventMap = {
+export type EventCallback = (data: any) => void;
+export type EventMap = {
     [key: string]: Set<EventCallback>;
 };
 /**

@@ -1,6 +1,3 @@
-import { ParadoxAppFunction } from "./types";
-type State = any;
-type StateCallback = (val: any) => void;
+import { ParadoxAppFunction, State, StateCallback } from "./types";
 export declare function addState(value: any): [State, StateCallback];
 export default function app(treeFunc: ParadoxAppFunction, targetNode: HTMLElement): void;
-export {};
