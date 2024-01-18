@@ -28,6 +28,7 @@ The following features are planned to be implemented before the first stable rel
 - [ ] Add state management support
 - [X] Add `Paradox.buildApp`. This will allow users to create reactive components.
 - [ ] Add `Paradox.buildApp` tests
+- [ ] Add submodules to `Paradox` namespace
 
 #### buildElement
 

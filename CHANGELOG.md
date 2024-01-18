@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.8] - 2024-01-18
+### Removed
+  - Types sport from index
+
 ## [0.4.7] - 2024-01-18
 ### Fixed
   - More types issues in `Paradox.buildApp` function
