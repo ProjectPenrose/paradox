@@ -23,10 +23,11 @@ const routes = [
     component: About,
     props
   },
-  // {
-  //   path: "/reactive",
-  //   component: Reactive
-  // }
+  {
+    path: "/reactive",
+    component: () => console.log("Reactive page"),
+    
+  }
 ];
 
 // Create a new router instance.

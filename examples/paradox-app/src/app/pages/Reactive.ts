@@ -1,43 +1,7 @@
-import app from "penrose-paradox";
-// import createElement from "../../../../build/core/createElement";
-// import render from "../../../../build/core/render";
-// import mount from "../../../../build/core/mount";
-// import diff from "../../../../build/core/diff";
-import { addState, onStateChange } from "penrose-paradox";
+import Paradox from "penrose-paradox";
+import { addState } from "penrose-paradox/build/core/buildApp";
 
 export default function Reactive () {
-  // console.log("Reactive page");
-
-  // const createVApp = (count) => createElement("div", {
-  //   attrs: {
-  //     id: "app",
-  //     dataCount: count
-  //   },
-  //   children: [
-  //     createElement("input"),
-  //     String(count),
-  //     createElement("img", {
-  //       attrs: {
-  //         src: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeW9pem8xcXlsamQ3Y3c4cjQ3bWVsMGE2cWJ6ZmV4aWZ5NmJteThhdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Af7J60LV3SjIqWXzzj/giphy.gif"
-  //       }
-  //     }),
-  //   ]
-  // });
-
-  // let count = 0;
-  // let vApp = createVApp(count);
-  // const app = render(vApp);
-
-  // let rootEle = mount(app, document.getElementById("root"));
-
-  // setInterval(() => {
-  //   count++;
-  //   const vNewApp = createVApp(count);
-  //   const patch = diff(vApp, vNewApp);
-  //   rootEle = patch(rootEle);
-  //   vApp = vNewApp;
-  // }, 1000);
-
   function Input(props = { count }) {
     // console.log(props);
     const [state, setState] = addState(count);
@@ -88,7 +52,7 @@ export default function Reactive () {
   }
 
   let count = 0;
-  app(
+  Paradox.buildApp(
     Test.bind({ count }),
     document.getElementById("root")
   )

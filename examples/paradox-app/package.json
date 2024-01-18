@@ -9,7 +9,8 @@
     "server": "nodemon build/server/index.js",
     "client": "concurrently \"npm run sass\" \"npm run webpack\"",
     "sass": "sass --watch src/scss/main.scss build/dist/css/style.css",
-    "webpack": "webpack --watch"
+    "webpack": "webpack --watch",
+    "tsc": "npx tsc --watch"
   },
   "keywords": [],
   "author": "",
