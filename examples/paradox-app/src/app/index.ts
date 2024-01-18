@@ -19,15 +19,15 @@ const routes: RouteList = [
     component: Home,
     props
   },
-  // {
-  //   path: "/about",
-  //   component: About,
-  //   props
-  // },
-  // {
-  //   path: "/reactive",
-  //   component: Reactive
-  // }
+  {
+    path: "/about",
+    component: About,
+    props
+  },
+  {
+    path: "/reactive",
+    component: Reactive
+  }
 ];
 
 const routerProps: RouterOptions = {
