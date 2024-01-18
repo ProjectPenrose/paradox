@@ -8,7 +8,7 @@ const penrose_paradox_1 = __importDefault(require("penrose-paradox"));
 // import render from "../../../../build/core/render";
 // import mount from "../../../../build/core/mount";
 // import diff from "../../../../build/core/diff";
-const index_1 = require("../../../node_modules/penrose-paradox/src/core/buildApp/index");
+const index_1 = require("../../..node_modules/penrose-paradox/src/core/buildApp/index");
 function Reactive() {
     // console.log("Reactive page");
     // const createVApp = (count) => createElement("div", {

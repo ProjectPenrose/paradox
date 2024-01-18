@@ -3,7 +3,7 @@ import Paradox from "penrose-paradox";
 // import render from "../../../../build/core/render";
 // import mount from "../../../../build/core/mount";
 // import diff from "../../../../build/core/diff";
-import { addState } from "../../../node_modules/penrose-paradox/src/core/buildApp/index";
+import { addState } from "../../..node_modules/penrose-paradox/src/core/buildApp/index";
 
 export default function Reactive () {
   // console.log("Reactive page");
