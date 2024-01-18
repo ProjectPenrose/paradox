@@ -1,4 +1,5 @@
 import Paradox from "penrose-paradox";
+import { ParadoxElementOptions } from "penrose-paradox/build/core/buildElement/types";
 
 // Import components
 import Divider from "../components/Divider";
@@ -11,8 +12,9 @@ export default function Home(props = {}) {
   const { root } = props;
 
   let count = 0;
-  function handlePubsubSubscription(message) {
-    const messageContainer = document.getElementById("messageContainer");
+  function handlePubsubSubscription(message: string) {
+    const messageContainer: HTMLElement | null = document.getElementById("messageContainer");
+    if (!messageContainer) return;
     messageContainer.innerHTML = `${message} ${count}`;
     count++;
   }
@@ -42,7 +44,7 @@ export default function Home(props = {}) {
               }
             }
           },
-          Divider(),
+          Divider() as ParadoxElementOptions,
           {
             tag: "div",
             options: {
@@ -54,7 +56,7 @@ export default function Home(props = {}) {
               ]
             }
           },
-          MessageContainer({ callback: handlePubsubSubscription }),
+          MessageContainer({ callback: handlePubsubSubscription }) as ParadoxElementOptions,
         ]
       }
     )

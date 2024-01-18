@@ -5,8 +5,9 @@ import Paradox from "penrose-paradox";
 export default function MessageContainer(props = {}) {
   const { callback = null } = props;
   let count = 0;
-  const subscribe = Paradox.pubsub.subscribe("button-clicked", callback ? callback : (message) => {
-    const messageContainer = document.getElementById("messageContainer");
+  const subscribe = Paradox.pubsub.subscribe("button-clicked", callback ? callback : (message: string) => {
+    const messageContainer: HTMLElement | null = document.getElementById("messageContainer");
+    if (!messageContainer) return;
     messageContainer.innerHTML = `${message} ${count}`;
     count++;
   });
