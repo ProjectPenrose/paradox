@@ -20,6 +20,10 @@ export type ParadoxElement = {
   children: ParadoxElementChildren;
 } | ParadoxAppFunction | string | ParadoxElement[]
 
+export type ParadoxElementResult = {
+  [key: string]: ParadoxElement | ParadoxElement[] | string;
+}
+
 export type ParadoxVirtualElement = {
   tagName: string;
   attrs: HTMLAttributes;
