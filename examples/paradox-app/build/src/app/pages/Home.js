@@ -15,6 +15,8 @@ function Home(props = {}) {
     let count = 0;
     function handlePubsubSubscription(message) {
         const messageContainer = document.getElementById("messageContainer");
+        if (!messageContainer)
+            return;
         messageContainer.innerHTML = `${message} ${count}`;
         count++;
     }

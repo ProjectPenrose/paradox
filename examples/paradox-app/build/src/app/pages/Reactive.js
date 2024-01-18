@@ -7,9 +7,8 @@ const penrose_paradox_1 = __importDefault(require("penrose-paradox"));
 const buildApp_1 = require("penrose-paradox/build/core/buildApp");
 function Reactive() {
     function Input(props = { count }) {
-        // console.log(props);
         const [state, setState] = (0, buildApp_1.addState)(count);
-        console.log(state); //, setState);
+        console.log(state);
         function handleClick() {
             count++;
             const newCount = count + 1;
@@ -26,16 +25,15 @@ function Reactive() {
             }
         };
     }
-    function Test(props = { count }) {
-        // console.log(props);
+    function Test(props) {
         return {
             div: {
                 attrs: {
                     id: "app",
                     classList: "test test2",
-                    data: {
-                        count: count
-                    },
+                    // data: {
+                    //   count: count
+                    // },
                 },
                 children: [
                     Input.bind({ count }),
@@ -53,7 +51,6 @@ function Reactive() {
     }
     let count = 0;
     penrose_paradox_1.default.buildApp(Test.bind({ count }), document.getElementById("root"));
-    // console.log(app);
 }
 exports.default = Reactive;
 ;

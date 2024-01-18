@@ -7,7 +7,7 @@ const penrose_paradox_1 = __importDefault(require("penrose-paradox"));
 // Import pages
 const Home_1 = __importDefault(require("./pages/Home"));
 const About_1 = __importDefault(require("./pages/About"));
-// import Reactive from "./pages/Reactive";
+const Reactive_1 = __importDefault(require("./pages/Reactive"));
 const baseUrl = process.env.BASE_URL || "http://localhost:3040"; // This is the url of the client app and it is used to redirect the user to the appropriate route.
 const root = document.querySelector("#root"); // This is the root element where the app will be rendered.
 // Define the props that will be passed to each component.
@@ -27,7 +27,7 @@ const routes = [
     },
     {
         path: "/reactive",
-        component: () => console.log("Reactive page"),
+        component: Reactive_1.default,
     }
 ];
 // Create a new router instance.

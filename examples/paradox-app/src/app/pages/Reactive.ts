@@ -1,11 +1,11 @@
 import Paradox from "penrose-paradox";
 import { addState } from "penrose-paradox/build/core/buildApp";
+import { ParadoxElementResult } from "penrose-paradox/build/core/buildApp/types";
 
 export default function Reactive () {
   function Input(props = { count }) {
-    // console.log(props);
     const [state, setState] = addState(count);
-    console.log(state)//, setState);
+    console.log(state)
 
     function handleClick() {
       count++;
@@ -25,16 +25,15 @@ export default function Reactive () {
     }
   } 
 
-  function Test(props = { count }) {
-    // console.log(props);
+  function Test(props?: { count: number }) {
     return {
       div: {
         attrs: {
           id: "app",
           classList: "test test2",
-          data: {
-            count: count
-          },
+          // data: {
+          //   count: count
+          // },
         },
         children: [
           Input.bind({ count }),
@@ -48,14 +47,12 @@ export default function Reactive () {
           },
         ]
       }
-    }
+    } as ParadoxElementResult;
   }
 
   let count = 0;
   Paradox.buildApp(
     Test.bind({ count }),
-    document.getElementById("root")
+    document.getElementById("root") as HTMLElement
   )
-
-  // console.log(app);
 };
