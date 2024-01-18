@@ -12,7 +12,7 @@ export type ParadoxEvents = {
 
 export type ParadoxElementChildren = (ParadoxElement | string)[];
 
-export type ParadoxAppFunction = () => ParadoxElement | ParadoxElement[]
+export type ParadoxAppFunction = () => ParadoxElementResult | ParadoxElement | ParadoxElement[]
 
 export type ParadoxElement = {
   attrs: HTMLAttributes;
