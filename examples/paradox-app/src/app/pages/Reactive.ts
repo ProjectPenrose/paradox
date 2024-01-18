@@ -1,7 +1,6 @@
 import Paradox from "penrose-paradox";
 import { addState } from "penrose-paradox/build/core/buildApp"
-import { RouterProps } from "penrose-paradox/build/core/Router";
-import { ParadoxElementResult,ParadoxElementChildren } from "penrose-paradox/build/core/buildApp/types";
+import { ParadoxElementResult, ParadoxElementChildren } from "penrose-paradox/build/core/buildApp/types";
 
 export default function Reactive () {
 
