@@ -1,4 +1,4 @@
-import Paradox from "../../../build";
+import Paradox from "penrose-paradox";
 
 // Import pages
 import Home from "./pages/Home";
@@ -25,7 +25,8 @@ const routes = [
   },
   {
     path: "/reactive",
-    component: Reactive
+    component: Reactive,
+    
   }
 ];
 

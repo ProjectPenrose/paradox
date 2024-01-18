@@ -1,4 +1,5 @@
-import Paradox from "../../../../build";
+import Paradox from "penrose-paradox";
+import { RouterProps } from "penrose-paradox/build/core/Router";
 
 // Import components
 import Divider from "../components/Divider";
@@ -7,12 +8,13 @@ import MessageContainer from "../components/MessageContainer";
 
 // Define the Home component.
 // This component will be rendered when the user navigates to the / route.
-export default function Home(props = {}) {
+export default function Home(props: RouterProps = {}) {
   const { root } = props;
 
   let count = 0;
-  function handlePubsubSubscription(message) {
-    const messageContainer = document.getElementById("messageContainer");
+  function handlePubsubSubscription(message: string) {
+    const messageContainer: HTMLElement | null = document.getElementById("messageContainer");
+    if (!messageContainer) return;
     messageContainer.innerHTML = `${message} ${count}`;
     count++;
   }
