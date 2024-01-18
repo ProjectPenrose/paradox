@@ -1,22 +1,22 @@
 type RouteParams = Map<string, (string | string[])>;
-type RouterProps = {
+export type RouterProps = {
     queryString?: string;
     params?: RouteParams;
     baseUrl?: string;
 };
-type Route = {
+export type Route = {
     path: string;
     component?: Function;
     layout?: Function;
     props?: RouterProps;
     pathSegments?: string[];
 };
-type RouteList = Route[];
-type RouterOptions = {
+export type RouteList = Route[];
+export type RouterOptions = {
     routes?: RouteList;
     baseUrl?: string;
 };
-type RouterMemo = {
+export type RouterMemo = {
     [key: string]: string;
 };
 /**

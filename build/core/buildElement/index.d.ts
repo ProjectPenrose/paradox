@@ -1,18 +1,4 @@
-type ParadoxElementOptions = {
-    id?: string;
-    classList?: string;
-    children?: ParadoxElementOptions[];
-    attributes?: {
-        [key: string]: string;
-    };
-    events?: {
-        [key: string]: EventListener;
-    };
-    text?: string;
-    style?: {
-        [key: string]: string;
-    };
-};
+import { ParadoxElementOptions } from "./types";
 /**
  * Builds and returns an HTML element based on the provided tag and options.
  *
@@ -28,4 +14,3 @@ type ParadoxElementOptions = {
  * @returns {HTMLElement} - The constructed HTML element.
  */
 export default function buildElement(tag: string, options?: ParadoxElementOptions): HTMLElement;
-export {};
