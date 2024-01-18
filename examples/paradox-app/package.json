@@ -37,6 +37,6 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "penrose-paradox": "^0.4.7"
+    "penrose-paradox": "^0.4.8"
   }
 }
