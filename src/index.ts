@@ -3,7 +3,7 @@ import * as buildElementTypes from "./core/buildElement/types";
 import Router, * as RouterTypes from "./core/Router";
 import pubsub, * as pubsubTypes from "./core/Pubsub";
 import buildApp from "./core/buildApp";
-import * as types from "./core/types";
+import * as buildAppTypes from "./core/buildApp/types";
 
 /**
  * Represents the Paradox object.
@@ -17,7 +17,7 @@ const Paradox = {
     buildElement: buildElementTypes,
     Router: RouterTypes,
     pubsub: pubsubTypes,
-    buildApp: types,
+    buildApp: buildAppTypes,
   }
 };
 
