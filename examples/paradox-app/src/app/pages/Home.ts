@@ -45,7 +45,7 @@ export default function Home(props: RouterProps = {}) {
               }
             }
           },
-          Divider() as ParadoxElementOptions,
+          Divider() as { tag: string, options: ParadoxElementOptions },
           {
             tag: "div",
             options: {
@@ -57,7 +57,7 @@ export default function Home(props: RouterProps = {}) {
               ]
             }
           },
-          MessageContainer({ callback: handlePubsubSubscription }) as ParadoxElementOptions,
+          MessageContainer({ callback: handlePubsubSubscription }) as { tag: string, options: ParadoxElementOptions },
         ]
       }
     )

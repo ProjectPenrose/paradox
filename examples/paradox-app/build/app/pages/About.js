@@ -32,7 +32,7 @@ function About(props = {}) {
             },
             (0, Divider_1.default)(),
             (0, Button_1.default)({ message: "About button clicked" }),
-            (0, MessageContainer_1.default)()
+            (0, MessageContainer_1.default)(),
         ]
     }));
 }
