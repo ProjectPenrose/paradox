@@ -30,8 +30,8 @@ export default function buildElement(
   // Destructure and provide default values for the options parameter
   const { id = "", classList = "", children = [], attributes = {}, events = {}, text = "", style = {} } = options;
 
-  // Create a new HTML element
-  const element = createElement(tag);
+  // Create a new HTML element TODO: Review createElement function
+  const element = document.createElement(tag);
 
   // Set the element ID if provided
   if (id) element.id = id.trim();

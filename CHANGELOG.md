@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.9] - 2024-01-20
+### Changed
+  - `createElement` function replaced by `document.createElement` in `Paradox.buildElement` function because it was causing issues with elements attributes
+
 ## [0.4.8] - 2024-01-18
 ### Removed
   - Types sport from index
