@@ -6,7 +6,7 @@ import { RouterProps } from "penrose-paradox/build/core/Router";
 export default function MessageContainer(props: RouterProps = {}) {
   const { callback = null } = props;
   let count = 0;
-  const subscribe = Paradox.pubsub.subscribe("button-clicked", callback ? callback : (message) => {
+  Paradox.pubsub.subscribe("button-clicked", callback ? callback : ({ message }) => {
     const messageContainer: HTMLElement | null = document.getElementById("messageContainer");
     if (!messageContainer) return;
     messageContainer.innerHTML = `${message} ${count}`;

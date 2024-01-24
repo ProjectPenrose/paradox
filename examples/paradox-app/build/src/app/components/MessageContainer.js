@@ -9,7 +9,7 @@ const penrose_paradox_1 = __importDefault(require("penrose-paradox"));
 function MessageContainer(props = {}) {
     const { callback = null } = props;
     let count = 0;
-    const subscribe = penrose_paradox_1.default.pubsub.subscribe("button-clicked", callback ? callback : (message) => {
+    penrose_paradox_1.default.pubsub.subscribe("button-clicked", callback ? callback : ({ message }) => {
         const messageContainer = document.getElementById("messageContainer");
         if (!messageContainer)
             return;
