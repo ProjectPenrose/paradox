@@ -48,8 +48,8 @@ function Home(props = {}) {
                     classList: "d-flex align-items-center",
                     children: [
                         (0, Button_1.default)({ message: "Home button clicked" }),
-                        (0, Button_1.default)({ message: "Remove pubsub subscription clicked", text: "Remove pubsub subscription", onClick: handleRemovePubsubSubscription }),
-                        (0, Button_1.default)({ message: "Add pubsub subscription clicked again", text: "Add pubsub subscription", onClick: () => penrose_paradox_1.default.pubsub.subscribe("button-clicked", handlePubsubSubscription) }),
+                        // Button({ message: "Remove pubsub subscription clicked", text: "Remove pubsub subscription", onClick: handleRemovePubsubSubscription }),
+                        // Button({ message: "Add pubsub subscription clicked again", text: "Add pubsub subscription", onClick: () => Paradox.pubsub.subscribe("button-clicked", handlePubsubSubscription) }),
                     ]
                 }
             },

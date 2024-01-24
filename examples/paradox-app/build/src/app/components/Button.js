@@ -9,7 +9,7 @@ const penrose_paradox_1 = __importDefault(require("penrose-paradox"));
 function Button(props = {}) {
     function handleClick() {
         const { message } = props;
-        penrose_paradox_1.default.pubsub.publish("button-clicked", message);
+        penrose_paradox_1.default.pubsub.publish("button-clicked", { message });
     }
     const { text = "Write message", onClick = handleClick } = props;
     return {
