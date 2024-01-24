@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const getText_1 = __importDefault(require("./helpers/getText"));
-const createElement_1 = __importDefault(require("./helpers/createElement"));
 const setAttributes_1 = __importDefault(require("./helpers/setAttributes"));
 const handleEvents_1 = __importDefault(require("./helpers/handleEvents"));
 const applyStyles_1 = __importDefault(require("./helpers/applyStyles"));
@@ -29,8 +28,8 @@ function buildElement(tag, options = { id: "", classList: "", children: [], attr
         throw new Error("Tag is required");
     // Destructure and provide default values for the options parameter
     const { id = "", classList = "", children = [], attributes = {}, events = {}, text = "", style = {} } = options;
-    // Create a new HTML element
-    const element = (0, createElement_1.default)(tag);
+    // Create a new HTML element TODO: Review createElement function
+    const element = document.createElement(tag);
     // Set the element ID if provided
     if (id)
         element.id = id.trim();

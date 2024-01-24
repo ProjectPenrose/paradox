@@ -1,5 +1,4 @@
 import getText from "./helpers/getText";
-import createElement from "./helpers/createElement";
 import setAttributes from "./helpers/setAttributes";
 import handleEvents from "./helpers/handleEvents";
 import applyStyles from "./helpers/applyStyles";

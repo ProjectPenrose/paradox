@@ -21,6 +21,3 @@ export type ParadoxEventListenerWeakMap = WeakMap<HTMLElement, Map<string, Event
 export type ParadoxElementMemoizedText = {
     [key: string]: string;
 };
-export type ParadoxElementCache = {
-    [key: string]: HTMLElement;
-};
