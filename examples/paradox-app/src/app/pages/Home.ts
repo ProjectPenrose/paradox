@@ -12,7 +12,8 @@ export default function Home(props: RouterProps = {}) {
   const { root } = props;
 
   let count = 0;
-  function handlePubsubSubscription(message: string) {
+  function handlePubsubSubscription(data: { [message: string]: string } = {}) {
+    const { message } = data;
     const messageContainer: HTMLElement | null = document.getElementById("messageContainer");
     if (!messageContainer) return;
     messageContainer.innerHTML = `${message} ${count}`;

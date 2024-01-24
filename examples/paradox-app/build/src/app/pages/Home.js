@@ -13,7 +13,8 @@ const MessageContainer_1 = __importDefault(require("../components/MessageContain
 function Home(props = {}) {
     const { root } = props;
     let count = 0;
-    function handlePubsubSubscription(message) {
+    function handlePubsubSubscription(data = {}) {
+        const { message } = data;
         const messageContainer = document.getElementById("messageContainer");
         if (!messageContainer)
             return;
